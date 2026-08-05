@@ -31,6 +31,7 @@ a row** [W-019].
 | `lectern:` | (no remote — local-only, flagged) | ~/Development/lectern |
 | `bibliometa-cli:` | (no remote — local-only, flagged) | ~/Development/bibliometa-cli |
 | `chatgpt-cli:` | (no remote — local-only, flagged) | ~/Development/chatgpt-cli |
+| `personal-work-ecosystem:` | (no remote — local-only, provisional cross-environment governance home) | ~/Development/personal-work-ecosystem |
 
 **Gateway-pin external-overlay register, extension of D-2 (operator-ratified 2026-07-31,
 pilot-closure package A′ — gateway-only pins stay out of the public package; identity =

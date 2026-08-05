@@ -58,6 +58,22 @@ carries the ratified direction and current lanes.
 | [Codex-managed Antigravity adapter](2026-07-20-codex-managed-antigravity-gemini-flash-adapter.md) | Implemented temporary provider slice and evidence about cross-provider reuse. | Treat as migration evidence and a later extension, not the immediate product center. |
 | [Gemini 3.6 Flash pilot](2026-07-26-gemini-flash-36-pilot.md) | **v3 RATIFIED (D-FP-1/2/3, 2026-07-25, two riders) — pilot EXECUTED AND CLOSED 2026-07-31:** paired trial produced NO overlay row (acceptance tie; `probes/records/P-20260731-pst-paired-trial.md`). W-026 is its warrant; XV-1 remains the promotion discipline. | The first live consumer of the intent-writer + crosswalk; its schema-level sol findings seed C-5's interchange-hardening list. |
 
+## Active contract proposal
+
+The [deployment-aware Claude package integrity proposal](2026-08-04-deployment-aware-package-integrity.md)
+is **approved with the clean-source release rule; its test-first implementation is corroborated
+in the uncommitted Apollo worktree**.
+The [adjudication](../reviews/2026-08-04-deployment-aware-package-integrity-opus-adjudication.md)
+dispositions every finding and preserves the initial authentication boundary separately. The
+proposal responds to a rolled-back cross-host materialization
+whose bounded installed package failed the canonical full-source link checker. It proposes a
+strict source scope plus an explicit, manifest-bound deployment scope. The 2026-08-04 owner
+decision authorizes that scoped implementation only; deployment, cleanup, parity retry, commit,
+and push remain outside it. The
+[implementation execution record](../reviews/2026-08-04-deployment-aware-package-integrity-execution-record.md)
+contains the RED/GREEN, mutation, cross-version, and authority-boundary evidence; it is not a
+deployment receipt.
+
 ## Supporting evidence
 
 Proposal reviews, correction records, and execution records live in [`../reviews/`](../reviews/).
@@ -76,4 +92,3 @@ the source of truth for empirical routing outcomes under [`../../probes/`](../..
    probe discipline in the canonical package.
 5. Installed copies are deployments, not competing authorities. Stable promotion requires a
    coherent source revision, release manifest, installation receipt, and drift check.
-

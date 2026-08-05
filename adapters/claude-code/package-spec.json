@@ -1,0 +1,147 @@
+{
+  "exact_files": [
+    {
+      "destination": "skills/delegation-triage/SKILL.md",
+      "source": "SKILL.md"
+    },
+    {
+      "destination": "skills/delegation-triage/ROUTES.md",
+      "source": "ROUTES.md"
+    },
+    {
+      "destination": "skills/delegation-triage/STATE.md",
+      "source": "STATE.md"
+    },
+    {
+      "destination": "skills/delegation-triage/WARRANTS.md",
+      "source": "WARRANTS.md"
+    },
+    {
+      "destination": "skills/delegation-triage/CONTRACT.md",
+      "source": "CONTRACT.md"
+    },
+    {
+      "destination": "skills/delegation-triage/EPISTEMICS.md",
+      "source": "EPISTEMICS.md"
+    },
+    {
+      "destination": "skills/delegation-triage/check_state.py",
+      "source": "check_state.py"
+    },
+    {
+      "destination": "skills/delegation-triage/check_wids.py",
+      "source": "check_wids.py"
+    },
+    {
+      "destination": "skills/delegation-triage/probes/INDEX.md",
+      "source": "probes/INDEX.md"
+    },
+    {
+      "destination": "skills/delegation-triage/probes/KNOWN-WEAKNESSES.md",
+      "source": "probes/KNOWN-WEAKNESSES.md"
+    },
+    {
+      "destination": "skills/delegation-triage/probes/README.md",
+      "source": "probes/README.md"
+    },
+    {
+      "destination": "skills/delegation-triage/probes/TEMPLATE.md",
+      "source": "probes/TEMPLATE.md"
+    },
+    {
+      "destination": "delegation.md",
+      "source": "adapters/claude-code/delegation.md"
+    }
+  ],
+  "forbidden_names": [
+    ".DS_Store",
+    "prompt.md"
+  ],
+  "forbidden_parts": [
+    ".git",
+    "fixtures",
+    "runtime"
+  ],
+  "required_integrity_commands": [
+    "python3 check_state.py ROOT/skills/delegation-triage/STATE.md",
+    "python3 check_wids.py --scope deployment --manifest ROOT/delegation-triage-package-manifest.json ROOT",
+    "python3 install.py claude-code --root ROOT --check"
+  ],
+  "schema_version": 1,
+  "source_only_links": [
+    {
+      "reason": "maintainer evidence remains in the canonical repository",
+      "source": "WARRANTS.md",
+      "target": "docs/research/external/2026-07-24-opus5-fable5-routing-audit/PROVENANCE.md"
+    },
+    {
+      "reason": "maintainer evidence remains in the canonical repository",
+      "source": "WARRANTS.md",
+      "target": "docs/research/external/2026-07-24-fable-vs-opus5-audit-packet-gpt56pro/PROVENANCE.md"
+    },
+    {
+      "reason": "review adjudication remains in the canonical repository",
+      "source": "probes/records/P-20260724-b3-crosswalk-panel.md",
+      "target": "../../docs/reviews/2026-07-24-b3-crosswalk-panel-adjudication.md"
+    },
+    {
+      "reason": "proposal remains in the canonical repository",
+      "source": "probes/records/P-20260724-b3-crosswalk-panel.md",
+      "target": "../../docs/proposals/2026-07-24-intent-outcome-record-crosswalk.md"
+    },
+    {
+      "reason": "review remains in the canonical repository",
+      "source": "probes/records/P-20260724-codex-telemetry-substrate.md",
+      "target": "../../docs/reviews/2026-07-24-portfolio-decomposition-fable-review.md"
+    },
+    {
+      "reason": "research remains in the canonical repository",
+      "source": "probes/records/P-20260724-otel-routing-observability-substrate.md",
+      "target": "../../docs/research/2026-07-24-routing-infrastructure-survey.md"
+    },
+    {
+      "reason": "review remains in the canonical repository",
+      "source": "probes/records/P-20260724-otel-routing-observability-substrate.md",
+      "target": "../../docs/reviews/2026-07-24-control-plane-initiative-claude-review.md"
+    },
+    {
+      "reason": "review adjudication remains in the canonical repository",
+      "source": "probes/records/P-20260726-b7-build-r4-gate-r1.md",
+      "target": "../../docs/reviews/2026-07-26-b7-r1-review-adjudication.md"
+    },
+    {
+      "reason": "proposal remains in the canonical repository",
+      "source": "probes/records/P-20260726-b7-build-r4-gate-r1.md",
+      "target": "../../docs/proposals/2026-07-24-intent-outcome-record-crosswalk.md"
+    },
+    {
+      "reason": "review adjudication remains in the canonical repository",
+      "source": "probes/records/P-20260726-flash-pilot-panel.md",
+      "target": "../../docs/reviews/2026-07-26-flash-pilot-panel-adjudication.md"
+    },
+    {
+      "reason": "proposal remains in the canonical repository",
+      "source": "probes/records/P-20260726-flash-pilot-panel.md",
+      "target": "../../docs/proposals/2026-07-26-gemini-flash-36-pilot.md"
+    },
+    {
+      "reason": "proposal remains in the canonical repository",
+      "source": "probes/records/P-20260726-flash-pilot-panel.md",
+      "target": "../../docs/proposals/2026-07-24-intent-outcome-record-crosswalk.md"
+    }
+  ],
+  "tracked_globs": [
+    {
+      "destination_prefix": "agents",
+      "exclude": [
+        "agents/MANIFEST.md"
+      ],
+      "pattern": "agents/*.md"
+    },
+    {
+      "destination_prefix": "skills/delegation-triage/probes/records",
+      "exclude": [],
+      "pattern": "probes/records/*.md"
+    }
+  ]
+}

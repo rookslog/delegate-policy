@@ -22,21 +22,166 @@ Usage:
 Plain stdlib. Zips are deterministic (fixed timestamps), so --check byte-compares honestly.
 """
 import argparse
+import fnmatch
 import hashlib
 import io
-import shutil
+import json
+import os
 import subprocess
 import sys
 import zipfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 PKG = Path(__file__).resolve().parent
-SKILL_FILES = ["SKILL.md", "ROUTES.md", "STATE.md", "WARRANTS.md", "CONTRACT.md",
-               "EPISTEMICS.md", "check_state.py", "check_wids.py"]
+PACKAGE_SPEC = PKG / "adapters" / "claude-code" / "package-spec.json"
+PACKAGE_MANIFEST_NAME = "delegation-triage-package-manifest.json"
 PLUGIN_NAME = "delegation-roster"
 PLUGIN_VERSION_DEFAULT = "0.3.0"
 PLUGIN_REFERENCES = ["ROUTES.md", "CONTRACT.md", "EPISTEMICS.md", "WARRANTS.md"]  # no STATE: by design
 ZIP_DATE = (2026, 1, 1, 0, 0, 0)  # fixed → deterministic archive → --check is byte-honest
+
+
+class PackageSpecError(ValueError):
+    """The declared Claude package boundary is invalid."""
+
+
+class DirtySourceError(RuntimeError):
+    """Release materialization was requested from a dirty source tree."""
+
+
+def require_clean_source(repo: Path):
+    try:
+        status = subprocess.run(
+            ["git", "-C", str(repo), "status", "--porcelain=v1", "-uall"],
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
+    except subprocess.CalledProcessError as exc:
+        raise DirtySourceError("cannot establish clean source state") from exc
+    if status:
+        count = len(status.splitlines())
+        raise DirtySourceError(f"release deployment refused: source tree has {count} change(s)")
+
+
+def git_file_mode(source: Path):
+    relative = str(source.relative_to(PKG))
+    try:
+        line = subprocess.run(
+            ["git", "-C", str(PKG), "ls-files", "-s", "--", relative],
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+    except subprocess.CalledProcessError as exc:
+        raise PackageSpecError(f"cannot read tracked mode: {relative}") from exc
+    mode = line.split(maxsplit=1)[0] if line else ""
+    if mode == "100755":
+        return "0755"
+    if mode == "100644":
+        return "0644"
+    raise PackageSpecError(f"unsupported tracked file mode for {relative}: {mode or 'missing'}")
+
+
+def build_manifest(pairs, spec, source_commit, spec_path):
+    installation_root = Path(os.path.commonpath([str(destination) for _, destination in pairs]))
+    if installation_root.is_file():
+        installation_root = installation_root.parent
+    entries = []
+    source_destinations = {}
+    for source, destination in pairs:
+        source_relative = str(source.relative_to(PKG))
+        destination_relative = str(destination.relative_to(installation_root))
+        source_destinations[source_relative] = destination_relative
+        data = source.read_bytes()
+        entries.append({
+            "destination": destination_relative,
+            "source": source_relative,
+            "size": len(data),
+            "mode": git_file_mode(source),
+            "sha256": sha256(data),
+        })
+    links = []
+    for declaration in spec["source_only_links"]:
+        if not isinstance(declaration, dict):
+            raise PackageSpecError("source_only_links entries must be objects")
+        source_relative = declaration.get("source")
+        target = declaration.get("target")
+        reason = declaration.get("reason")
+        if source_relative not in source_destinations:
+            raise PackageSpecError(f"source-only link source is not packaged: {source_relative}")
+        if not isinstance(target, str) or not target or not isinstance(reason, str) or not reason:
+            raise PackageSpecError("source-only link target and reason must be non-empty strings")
+        links.append({
+            "source": source_destinations[source_relative],
+            "target": target,
+            "reason": reason,
+        })
+    return {
+        "schema_version": 1,
+        "source_commit": source_commit,
+        "dirty_source": False,
+        "package_spec_sha256": sha256(spec_path.read_bytes()),
+        "entries": sorted(entries, key=lambda entry: entry["destination"]),
+        "source_only_links": sorted(links, key=lambda link: (link["source"], link["target"])),
+    }
+
+
+def manifest_bytes(manifest):
+    return (json.dumps(manifest, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+
+
+def load_package_spec(path: Path):
+    try:
+        spec = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise PackageSpecError(f"cannot load package spec: {exc}") from exc
+    if not isinstance(spec, dict) or spec.get("schema_version") != 1:
+        raise PackageSpecError("unsupported package spec schema_version")
+    for key in ("exact_files", "tracked_globs", "forbidden_parts",
+                "forbidden_names", "source_only_links", "required_integrity_commands"):
+        if not isinstance(spec.get(key), list):
+            raise PackageSpecError(f"package spec {key} must be a list")
+    if not spec["required_integrity_commands"] or not all(
+        isinstance(command, str) and command for command in spec["required_integrity_commands"]
+    ):
+        raise PackageSpecError("package spec required_integrity_commands must be non-empty strings")
+    return spec
+
+
+def safe_relative_path(value, label):
+    if not isinstance(value, str) or not value:
+        raise PackageSpecError(f"{label} must be a non-empty string")
+    path = PurePosixPath(value)
+    if path.is_absolute() or any(part in ("", ".", "..") for part in path.parts):
+        raise PackageSpecError(f"unsafe {label}: {value!r}")
+    return path
+
+
+def tracked_source_paths():
+    try:
+        output = subprocess.run(
+            ["git", "-C", str(PKG), "ls-files", "-z"],
+            capture_output=True,
+            check=True,
+        ).stdout
+    except subprocess.CalledProcessError as exc:
+        raise PackageSpecError("cannot enumerate tracked package sources") from exc
+    return sorted(path.decode("utf-8") for path in output.split(b"\0") if path)
+
+
+def validate_source(relative, spec, tracked):
+    path = safe_relative_path(relative, "source path")
+    if relative not in tracked:
+        raise PackageSpecError(f"package source is not tracked: {relative}")
+    if any(part in spec["forbidden_parts"] for part in path.parts):
+        raise PackageSpecError(f"package source contains forbidden path part: {relative}")
+    if path.name in spec["forbidden_names"]:
+        raise PackageSpecError(f"package source has forbidden name: {relative}")
+    source = PKG / Path(*path.parts)
+    if source.is_symlink() or not source.is_file():
+        raise PackageSpecError(f"package source is not a regular non-symlink file: {relative}")
+    return source
 
 
 def sha256(data: bytes) -> str:
@@ -47,10 +192,6 @@ def agent_files():
     return sorted(p for p in (PKG / "agents").glob("*.md") if p.name != "MANIFEST.md")
 
 
-def probe_files():
-    return sorted(p for p in (PKG / "probes").rglob("*") if p.is_file())
-
-
 def head_commit():
     try:
         return subprocess.run(["git", "-C", str(PKG), "rev-parse", "--short", "HEAD"],
@@ -59,17 +200,62 @@ def head_commit():
         return "UNKNOWN"
 
 
-def claude_code_plan(root: Path):
+def full_head_commit():
+    try:
+        return subprocess.run(
+            ["git", "-C", str(PKG), "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+    except Exception as exc:
+        raise PackageSpecError("cannot resolve source commit") from exc
+
+
+def claude_code_plan(root: Path, spec=None):
     """(source, destination) pairs for the claude-code target."""
-    skill_home = root / "skills" / "delegation-triage"
-    pairs = [(PKG / f, skill_home / f) for f in SKILL_FILES]
-    pairs += [(p, skill_home / p.relative_to(PKG)) for p in probe_files()]
-    pairs += [(p, root / "agents" / p.name) for p in agent_files()]
-    # ~/.claude/delegation.md is @-imported by the user's global CLAUDE.md (highest-precedence
-    # config surface): route values drifting there silently outvote ROUTES.md, so it deploys
-    # from canonical and --check diffs it (operator authorization 2026-07-24).
-    pairs.append((PKG / "adapters/claude-code/delegation.md", root / "delegation.md"))
-    return pairs
+    if spec is None:
+        spec = load_package_spec(PACKAGE_SPEC)
+
+    tracked = tracked_source_paths()
+    tracked_set = set(tracked)
+    declared = []
+    for entry in spec["exact_files"]:
+        if not isinstance(entry, dict):
+            raise PackageSpecError("exact_files entries must be objects")
+        source_rel = entry.get("source")
+        destination_rel = entry.get("destination")
+        source = validate_source(source_rel, spec, tracked_set)
+        destination_path = safe_relative_path(destination_rel, "destination path")
+        declared.append((source_rel, source, destination_rel,
+                         root / Path(*destination_path.parts)))
+
+    for rule in spec["tracked_globs"]:
+        if not isinstance(rule, dict):
+            raise PackageSpecError("tracked_globs entries must be objects")
+        pattern = rule.get("pattern")
+        prefix = safe_relative_path(rule.get("destination_prefix"), "destination prefix")
+        excludes = rule.get("exclude", [])
+        if not isinstance(pattern, str) or not pattern or not isinstance(excludes, list):
+            raise PackageSpecError("invalid tracked_globs entry")
+        matches = [path for path in tracked
+                   if fnmatch.fnmatchcase(path, pattern) and path not in excludes]
+        if not matches:
+            raise PackageSpecError(f"tracked_globs pattern matched no files: {pattern}")
+        for source_rel in matches:
+            source = validate_source(source_rel, spec, tracked_set)
+            destination_rel = str(prefix / PurePosixPath(source_rel).name)
+            declared.append((source_rel, source, destination_rel,
+                             root / Path(*PurePosixPath(destination_rel).parts)))
+
+    sources = [source_rel for source_rel, _, _, _ in declared]
+    destinations = [destination_rel for _, _, destination_rel, _ in declared]
+    if len(sources) != len(set(sources)):
+        raise PackageSpecError("duplicate package source")
+    if len(destinations) != len(set(destinations)):
+        raise PackageSpecError("duplicate package destination")
+    return [(source, destination) for _, source, _, destination in
+            sorted(declared, key=lambda item: item[2])]
 
 
 def in_history(rel: str, digest: str) -> bool:
@@ -114,7 +300,19 @@ def extra_deployed(root: Path, pairs):
 
 def run_claude_code(args):
     root = Path(args.root).expanduser()
-    pairs = claude_code_plan(root)
+    if not args.check:
+        try:
+            require_clean_source(PKG)
+        except DirtySourceError as exc:
+            print(f"FAIL: {exc}")
+            return 1
+    try:
+        spec = load_package_spec(PACKAGE_SPEC)
+        pairs = claude_code_plan(root, spec)
+    except PackageSpecError as exc:
+        print(f"FAIL: {exc}")
+        return 1
+    manifest_path = root / PACKAGE_MANIFEST_NAME
     if args.check or args.dry_run:
         counts = {"OK": 0, "BEHIND": 0, "DRIFT?": 0, "DIVERGED": 0, "MISSING": 0}
         for src, dst in pairs:
@@ -149,17 +347,58 @@ def run_claude_code(args):
         if extras:
             print("EXTRA = deployed roster definitions the package does not own "
                   "(not stamped in agents/MANIFEST.md; a re-deploy will NOT remove them).")
-        # exit 1 only on genuine divergence: lag is normal for a package that appends
-        # evidence continuously and deploys occasionally.
-        return 1 if (args.check and counts["DIVERGED"]) else 0
+        if args.dry_run:
+            try:
+                manifest = build_manifest(pairs, spec, full_head_commit(), PACKAGE_SPEC)
+            except PackageSpecError as exc:
+                print(f"FAIL: {exc}")
+                return 1
+            data = manifest_bytes(manifest)
+            print(f"would write {manifest_path} (sha256 {sha256(data)})")
+            return 0
+
+        # Import only after release materialization's clean-source gate. Importing this
+        # sibling can create __pycache__, which must not make a clean tree dirty before
+        # the gate has established the release source state.
+        from check_wids import validate_deployment
+
+        integrity = validate_deployment(root, manifest_path, PKG / "agents" / "MANIFEST.md")
+        for failure in integrity.failures:
+            print(f"FAIL: {failure}")
+        for warning in integrity.warnings:
+            print(f"WARN: {warning}")
+        for edge in integrity.source_only:
+            print(f"SOURCE_ONLY: {edge}")
+        print(
+            f"deployment integrity: {integrity.checked_files} files · "
+            f"{len(integrity.source_only)} SOURCE_ONLY · {len(integrity.extras)} EXTRA · "
+            f"{'OK' if integrity.ok else 'FAIL'}"
+        )
+        # Lag remains informational only while the externally stamped installed manifest
+        # validates. Genuine divergence OR any integrity failure is fail-closed.
+        return 1 if counts["DIVERGED"] or not integrity.ok else 0
+
+    try:
+        manifest = build_manifest(pairs, spec, full_head_commit(), PACKAGE_SPEC)
+    except PackageSpecError as exc:
+        print(f"FAIL: {exc}")
+        return 1
     for src, dst in pairs:
         dst.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(src, dst)
+        dst.write_bytes(src.read_bytes())
+        dst.chmod(int(git_file_mode(src), 8))
+    data = manifest_bytes(manifest)
+    manifest_path.write_bytes(data)
+    manifest_path.chmod(0o644)
     print(f"deployed {len(pairs)} files under {args.root}")
     print("\nMANIFEST stamp (agents/ rows) — paste-ready:")
     for p in agent_files():
         print(f"  {p.name}: {sha256(p.read_bytes())}")
-    print(f"\nsource commit: {head_commit()}")
+    print(f"\nsource commit: {manifest['source_commit']}")
+    print(f"package manifest: {manifest_path}\nsha256 {sha256(data)}")
+    print("paste-ready manifest stamp:")
+    print("  <!-- claude-package-manifest:v1 "
+          f"sha256={sha256(data)} source_commit={manifest['source_commit']} -->")
     print("NOW: stamp agents/MANIFEST.md, then RESTART the session (roster registers at START).")
     return 0
 

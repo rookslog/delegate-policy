@@ -17,6 +17,7 @@ Rules:
   - Also fails if the BOLD `**Active: <profile>**` line is missing or unbolded — the deployed
     spawn-triage-guard parses exactly that format and silently defaults otherwise (lens 2 F2).
 """
+import argparse
 import re
 import sys
 from datetime import date
@@ -25,14 +26,24 @@ from pathlib import Path
 DATE_RE = re.compile(r"(\d{4})-(\d{2})-(\d{2})")
 
 
+def iso_date(value):
+    try:
+        return date.fromisoformat(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("expected YYYY-MM-DD") from exc
+
+
+def parse_args(argv):
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("state_path", nargs="?", type=Path)
+    parser.add_argument("--today", type=iso_date, default=date.today())
+    return parser.parse_args(argv[1:])
+
+
 def main(argv):
-    args = [a for a in argv[1:] if not a.startswith("--")]
-    state_path = Path(args[0]) if args else Path(__file__).resolve().parent / "STATE.md"
-    today = date.today()
-    for i, a in enumerate(argv):
-        if a == "--today" and i + 1 < len(argv):
-            y, m, d = DATE_RE.match(argv[i + 1]).groups()
-            today = date(int(y), int(m), int(d))
+    args = parse_args(argv)
+    state_path = args.state_path or Path(__file__).resolve().parent / "STATE.md"
+    today = args.today
 
     if not state_path.is_file():
         print(f"FAIL: STATE file not found: {state_path}")

@@ -25,6 +25,22 @@ Excluded from the roster migration: `knowledge-store.md` (a reference specificat
 sitting in the deployment directory, not an agent definition — left where it lives; flagged for
 the operator to relocate).
 
+## Claude package-manifest stamp contract
+
+Release-class `install.py claude-code` runs only from a clean canonical source tree and emits a
+deterministic `delegation-triage-package-manifest.json` at the Claude installation root. Before
+that deployment is accepted, append its exact printed stamp to the applicable deployment row or
+record using this machine-readable form:
+
+```text
+<!-- claude-package-manifest:v1 sha256=<64 lowercase hex> source_commit=<40 lowercase hex> -->
+```
+
+The stamp is an external trust anchor: `check_wids.py --scope deployment` and
+`install.py claude-code --check` reject a missing or mismatched stamp. Record a real value only
+after a separately authorized deployment. Do not pre-stamp a proposed manifest, reuse a stamp for
+different bytes, or infer acceptance from the installed manifest alone.
+
 ## Recorded deployments
 
 | target | stamped | status |
