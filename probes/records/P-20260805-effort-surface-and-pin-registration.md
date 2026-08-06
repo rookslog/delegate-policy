@@ -23,3 +23,20 @@
 - **tally:** moves no counter. Feeds routing-table §3 as a dated re-verification; feeds the CONTRACT delivery-surface note (per-call effort → Workflow only, mid-session).
 - deviations from clean protocol (named): single build, single session type (interactive desktop app); registration behavior on headless/cron sessions untested. Author-adjudicated (mechanical findings).
 - record locator(s) + minimal verbatim excerpt(s): Agent tool error: "Agent type 'dt-probe-noop' not found. Available agents: general-purpose, statusline-setup, claude, …" (full list in session transcript). Reviewer-max canonical sha256 8785a6f2ccd2c4c79a75137fc0711d5e43dad624a4c2368c964896d4e0093865.
+
+## Correction — same session, ~40 minutes later
+
+Finding 2 held "registers at session START" as re-verified. **Falsified as an
+absolute the same session:** `reviewer-max` (deployed mid-session, minutes
+before the noop probe) appeared in the live roster ~40 minutes after deploy,
+announced by a harness system message, with no restart. So the refined claim
+is: registration is **not immediate** (the noop spawn failed seconds after
+its deploy — that observation stands) but **does occur mid-session on a
+deferred refresh**, trigger unknown (candidates: periodic scan, task-completion
+event; single observation, unadjudicated). MANIFEST's "deploy without a
+restart is a silent no-op" is too strong on the current build: it is a
+delayed op. Finding 4's validation half-resolved: the pin RESOLVES (name,
+description, and tool restrictions parsed into the roster listing); the
+served effort tier for `max` remains unattested. Attestation: roster
+announcement in stylewright session transcript 5e1e8107, timestamped between
+the wf_2e20b484-637 completion and this correction.
