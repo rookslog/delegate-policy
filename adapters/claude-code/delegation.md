@@ -28,4 +28,7 @@ Spawning any subagent, teammate, or Workflow → **load `delegation-triage` firs
 Generic spawns inherit session effort (observed live 2026-07-10: an intended fable/high
 orchestration ran at session-inherited xhigh through the generic Agent tool). If the route's
 effort ≠ session effort, a roster pin (`~/.claude/agents/`) or a per-call `{model, effort}`
-surface is the only correct delivery; pins register at session START.
+surface is the only correct delivery. A pin minted mid-session is not live in the turn you write
+it, but it registers on the next user-turn boundary and is spawnable from there (corrected
+2026-08-07; STATE `platform-pin-registration`) — so minting one to reach a route is a real option,
+not a next-session-only move.

@@ -80,8 +80,9 @@ install, Cowork plugin, Codex consumer notes); the core stays platform-agnostic.
 
 Definitions in THIS repo are canonical; every deployed copy (`~/.claude/`, the Cowork plugin,
 etc.) is a recorded deployment stamped in `agents/MANIFEST.md` with a sha256 content hash.
-Deploy = copy + manifest stamp + **session restart** (roster definitions register only at session
-start — a deploy without a restart is a silent no-op). Manual install steps:
+Deploy = copy + manifest stamp + **session restart** (a deploy is not live in the turn it lands,
+but it is a delayed op, not a silent no-op — added types register on the next user-turn boundary;
+corrected 2026-08-07, STATE `platform-pin-registration`). Manual install steps:
 `adapters/claude-code/INSTALL.md`. After editing any `agents/*.md`, re-hash and update the
 manifest table in the same commit.
 

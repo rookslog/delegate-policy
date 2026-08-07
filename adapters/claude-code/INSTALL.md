@@ -32,8 +32,11 @@ the installed tree in canonical `agents/MANIFEST.md`.
 - The spawn-triage guard (`~/.claude/hooks/spawn-triage-guard.py`) reads the bold
   `**Active: <profile>**` line in deployed `STATE.md`; exactly one such line may exist across the
   skill home.
-- **Restart**: roster definitions register at session start; a deploy without a restart does not
-  activate changed definitions.
+- **Restart**: restart after a roster change. A deploy is not live in the turn it lands, but it is
+  a delayed op rather than a no-op — on this build the harness announces added types with an
+  `agent_listing_delta` at the next user-turn boundary and they spawn from there
+  (P-20260807-pin-registration-turn-boundary). Whether an *edited* definition re-registers the
+  same way is untested, which is why the install contract still asks for the restart.
 
 Rollback is a separately authorized deployment from the previous clean source commit followed by
 an external manifest-stamp update and restart. The installer never removes extra agents or stale

@@ -112,8 +112,10 @@ base and new evidence then comes from `probes/` alone.
 
 ## KNOWN-CONSUMERS
 
-- **Claude Code:** `python3 install.py claude-code`, stamp `agents/MANIFEST.md`, restart (roster
-  registers at session START). The spawn-triage guard reads the deployed STATE.md.
+- **Claude Code:** `python3 install.py claude-code`, stamp `agents/MANIFEST.md`, restart (added
+  roster types also register on the next user-turn boundary — corrected 2026-08-07, STATE
+  `platform-pin-registration` — but restart is the dependable path). The spawn-triage guard reads
+  the deployed STATE.md.
 - **Cowork / sandboxed sessions:** install the generated plugin (`install.py cowork`). The plugin
   ships no volatile state — its skill degrades gracefully: project-side STATE if readable,
   otherwise premium availability is Unchecked → fallback routes.

@@ -10,14 +10,14 @@ clean-source release rule and test-first implementation
 
 **Source baseline:** `de91ff945d5bec44538990a2a9c7ccf2ba09be4a` on Apollo `main`
 
-**Result:** implementation corroborated in the dirty canonical worktree; not committed, deployed,
-cleaned up, or parity-tested
+**Result:** implementation committed as `56d06a3`; existing Cowork correction preserved as
+`aaa7f73`; Apollo deployment and exact cleanup recorded separately; not pushed or parity-tested
 
 ## Maintainer action
 
-Use this record to review the implementation worktree and decide whether to authorize a coherent
-commit. Do not treat it as a deployment receipt. A later deployment still needs its own clean
-source commit, exact manifest stamp, baseline, cleanup decision, rollback, and restart evidence.
+Use this record to review the implementation evidence. It is not the deployment receipt; the
+later Apollo materialization and cleanup are recorded in
+[`DT-DEPLOY-2026-08-04-001`](2026-08-04-deployment-aware-package-integrity-deployment-cleanup-record.md).
 
 ## Implemented contract
 
@@ -93,11 +93,11 @@ The pre-existing modified `STATE.md` and untracked probe fixture/runtime trees r
 were not absorbed into package selection. The implementation added the previously authorized PWE
 locator line to `WARRANTS.md`; no other route doctrine or agent definition changed.
 
-No command in this execution targeted the live Apollo or Dionysus Claude installation for writes;
-all install materialization used temporary roots, while the default-root dry-run refused before
-writes. No cleanup, authenticated action, parity retry, commit, push, second reviewer call, or
-descendant-agent call occurred. The branch, local HEAD, and cached `origin/main` all remained at
-`de91ff945d5bec44538990a2a9c7ccf2ba09be4a` when checked.
+During this implementation execution, no command targeted a live Claude installation for writes;
+all materialization used temporary roots, while the default-root dry-run refused before writes.
+The owner subsequently authorized commit, Apollo deployment, and cleanup; those later actions are
+separated into `DT-DEPLOY-2026-08-04-001`. No authenticated action, parity retry, push, second
+reviewer call, or descendant-agent call occurred in this implementation execution.
 
 The implementation did not receive an additional code-review model call: the approved contract
 explicitly kept further model calls and descendants out of scope. The earlier Apollo-local Opus
@@ -105,6 +105,6 @@ review is a design-contract review, not a claim that it reviewed these implement
 
 ## Remaining authority boundary
 
-Recommendation: review the coherent worktree for a possible commit. Commit, push, deployment,
-excluded-content cleanup, restart, and Apollo/Dionysus parity execution remain separate actions.
-In particular, this slice generated or stamped no manifest in a live installation.
+The implementation and preserved-state commits now exist locally. Push, restart, and
+Apollo/Dionysus parity execution remain separate actions; consult the later deployment record for
+the live manifest and cleanup state.

@@ -72,7 +72,10 @@ decision authorizes that scoped implementation only; deployment, cleanup, parity
 and push remain outside it. The
 [implementation execution record](../reviews/2026-08-04-deployment-aware-package-integrity-execution-record.md)
 contains the RED/GREEN, mutation, cross-version, and authority-boundary evidence; it is not a
-deployment receipt.
+deployment receipt. The later
+[Apollo deployment and cleanup record](../reviews/2026-08-04-deployment-aware-package-integrity-deployment-cleanup-record.md)
+records the clean source commit, external manifest stamp, divergence adjudication, recoverable
+cleanup, and remaining restart/parity boundary.
 
 ## Supporting evidence
 
