@@ -8,7 +8,8 @@ route whose warrant says Contested or Conjecture is a probe to run, not a prior 
 Provenance, ruling quotes, dates, and evidence for every row live in
 `ROUTE-HISTORY.md` (canonical repo only, not packaged into adapters) — load only when auditing
 a route, never for routing.
-Precedence: **project overlay > profile delta > this table** (CONTRACT §5). Route effort is
+Precedence: **explicit operator declaration > project overlay > profile delta > this table**
+(CONTRACT §2a, §5) — a declared override is delivered and recorded, not argued. Route effort is
 delivered only by a roster pin or a per-call `{model, effort}` surface — generic spawns inherit
 session effort (CONTRACT §3).
 
@@ -17,7 +18,7 @@ driving long-horizon work.
 
 | # | Task class | Route | Fallback (no-fable) | Warrants |
 |---|---|---|---|---|
-| R1 | Review gates / adversarial verification | **opus high** (`reviewer` pin); keep ≥2 independent lenses on high-stakes artifacts · cross-vendor lens CANDIDATE (external overlay, D-2 RATIFIED): the sol code-review instrument (contract sha `ab115b5c…` high) / sol design-review instrument (contract sha `5eea6712…` xhigh) — **availability predicate: gateway (`claudex`) session AND instrument hash matches the W-record locator**; hashes + locations in WARRANTS "sol instrument identity" note under KNOWN-REPOS | same; xhigh per stated reason; fable per stated operator request | W-001, W-019 |
+| R1 | Review gates / adversarial verification | **opus high** (`reviewer` pin); keep ≥2 independent lenses on high-stakes artifacts · cross-vendor lens CANDIDATE (external overlay, D-2 RATIFIED): the sol code-review instrument (contract sha `ab115b5c…` high) / sol design-review instrument (contract sha `5eea6712…` xhigh) — **availability predicate: gateway (`claudex`) session AND instrument hash matches the W-record locator**; hashes + locations in WARRANTS "sol instrument identity" note under KNOWN-REPOS | same; **xhigh per stated reason — surface: `reviewer-xhigh` pin (minted 2026-08-07; UNPROBED, W-001 favours a second lens over a deeper one)**; fable per stated operator request | W-001, W-019 |
 | R2 | Architecture / design / contract & rubric authoring | **fable high** | opus high + reviewer gate (Provisional) | W-002 |
 | R3 | Front-end design | **fable high** | opus high (Provisional) | W-003 |
 | R4 | Coding / agentic implementation | **opus medium** (`implementer` pin; Provisional — W-024(c) Contested, effort-frontier probe open); **high via the `implementer-high` pin** (minted 2026-08-07 on operator request — before it, the high escalation had no pin that could deliver it and was unreachable through the Agent tool); xhigh per stated reason | same; xhigh per stated reason | W-004, W-020, W-024, W-025 |

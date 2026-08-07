@@ -26,6 +26,19 @@ difference). Take model × effort from the row, apply the active profile's delta
 close or the row is marked Contested/Conjecture/CANDIDATE/PARKED — those are probes to run
 (paired, identical harness, diff the yield), not priors to trust.
 
+### §2a Operator declaration overrides the route (added 2026-08-07)
+
+An explicitly declared model, effort, or pin from the operator wins over the overlay, the
+profile, and the ROUTES row. Deliver it; do not re-argue it, and do not route around it with a
+cheaper approximation. Where the declaration contradicts a warrant, say so in one clause and
+proceed anyway — an override taken deliberately against the evidence is a risk the operator is
+entitled to take.
+
+Record the override in the fit line: the route it displaced, the declared pair, and the reason
+if one was given. The point of the record is that the cost lands in a later post-mortem rather
+than in a pre-spawn negotiation. An override that is never recorded cannot be reflected on, and
+becomes indistinguishable from a routing error.
+
 ## §3 Pick the control surface that can deliver the pair
 
 This is where delegations silently go wrong. Surfaces, by what they can actually pin:
