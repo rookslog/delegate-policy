@@ -29,10 +29,18 @@ one artifact the integration deliberation concluded is THE durable asset — has
 | B | fresh coined brand (strongest candidates surfaced: **remit** — "the scope of delegated authority", near-perfect semantic fit; **legate/legation** — delegated authority + its house) | A real identity, chosen not inherited; works equally as a future standard's name | Availability **Unchecked** for every candidate (npm `remit` believed taken — Conjecture); re-stamps npm scope, namespace constant (one-line by design, constitution §OI-1), and every doc; taste iteration delays the win |
 | C | two brands now: product keeps `delegateops`, practice family gets its own name | Honestly encodes the product-vs-practice boundary (packaging option 4) before structure | Decides the structural question by naming — the operator explicitly deferred structure; two identity decisions instead of one |
 | D | defer | zero cost | the mess persists; every week adds references that the eventual rename must sweep |
+| **E (recommended, rev.2)** | **brand the invariant: family = Capsule** (the spine); members role-named against the spine; **`DelegateOps` persists as the MEMBER name for the v0 supervisor-runtime**, where delegation is literally true | Paradigm-neutral at the family level — the name that survives is the asset that survives (records outlive paradigms, the architecture's own thesis); a future peer/market runtime arrives as a sibling member, no rename, no lie; merges naturally with the standard-first structural option | bare `capsule` is a common word — collisions likely, availability **Unchecked** (P1 decides; qualified or coined variant is the fallback); family brand and the measured-free `@delegateops` npm scope diverge until the structural decision |
 
-**Recommendation: A.** Load-bearing assumption: the operator's objection is incoherence, not
-the word "delegate". Flip: if the operator wants a coined identity (B), only §4 Phase 1 is
-redone — the scheme, map, and migration phases survive brand substitution verbatim.
+**Recommendation: E (rev.2, 2026-08-14 same day).** Rev.1 recommended A on the load-bearing
+assumption that the operator's objection was incoherence, not the word "delegate" — the
+operator's follow-up ("should we be using delegate if we are potentially opening up to other
+paradigms?") falsified that assumption, firing rev.1's own flip condition. "Delegate" names one
+coordination paradigm (principal→agent); the family-level invariant across paradigms is the
+*recorded commitment of work* — the capsule — so the family brands the invariant and
+paradigm-committed names live at the member level where they are true. Rev.2's load-bearing
+assumption: a workable Capsule-family name clears the P1 availability measurement (bare,
+qualified, or coined variant). Flip: if no variant clears, fall back to A with the paradigm
+caveat recorded, or a coined neutral (B) chosen on the same brand-the-invariant criterion.
 
 ### N-2 — The spine's name
 
