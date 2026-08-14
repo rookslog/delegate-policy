@@ -163,6 +163,11 @@ def validate_deployment(installation_root, manifest_path, stamp_path):
             if path.is_file() or path.is_symlink():
                 actual_skill.add(str(path.relative_to(root)))
     for extra in sorted(actual_skill - expected_skill):
+        # 2026-08-14: the Stage-2 (2026-07-10) ARCHIVE stubs are legitimate deployed-only
+        # residents — provenance trail of the retired routing-table surface, no source home;
+        # same two paths the source scope already exempts above.
+        if extra.startswith("skills/delegate-triage/references/"):
+            continue
         result.failures.append(f"unlisted package file: {extra}")
 
     agents_root = root / "agents"
