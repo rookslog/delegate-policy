@@ -1,7 +1,23 @@
 # Family naming — one brand, role-named members, a named spine
 
-**Status: DRAFT — awaiting operator ratification of decisions N-1..N-4. Nothing renames until
-then.** Filed 2026-08-14 on operator instruction ("lets do the family renaming first, draft the
+**Status: N-1 RATIFIED + N-2 RESOLVED, operator in-chat, 2026-08-14 (same day, rev.3).**
+Final names: stem **`delegate-`** — **delegate-ops** (unchanged) · **delegate-policy** (from
+`delegation-triage`; operator ratified the policy-over-triage member name: "policy" is the
+mechanism-invariant noun — a table, a conditioned function, a learned router, and auction rules
+are all policies, so the name survives the planned mechanism overhaul; operator: "i guess it is
+kind of policing / determining these decisions at different nodes etc. so sure") ·
+**delegate-learn** (from `orchestration-learning`) · **delegate-runtime** (from
+`delegation-runtime`). The deployed per-spawn SKILL keeps an act-name (**delegate-triage**) —
+the repo holds the artifact (policy), the skill performs the act (triage); act/artifact split
+expressed in naming, muscle memory preserved. **N-2 re-resolved: Capsule WITHDRAWN** (operator:
+"capsule is a bit weird"; record-noun and practice-noun shortlists declined) — the spine goes by
+the plain descriptive name, **the delegate record standard** (intent + outcome records, as the
+crosswalk already says). N-3 (signal-layer sovereign) and N-4 (peripherals out of scope) stand
+as unopposed recommendations. **P1 availability measurement PASSED 2026-08-14**: GitHub
+`loganrooks/{delegate-policy,delegate-learn,delegate-runtime,delegate-triage,delegate-ops}` all
+404; no local dir collisions; npm not implicated (only `delegateops` publishes, OI-1).
+**Migration P2–P4 pending — staged as a dedicated pass** (renames touch live deployed surfaces;
+not executed from the tail of a long session). Filed 2026-08-14 on operator instruction ("lets do the family renaming first, draft the
 naming proposal"), following the packaging deliberation (this session; alternatives + steelmen
 delivered in-chat, summarized in §5). This proposal is deliberately the **cheap, reversible
 first move** from that deliberation: renaming forecloses no structural option (monorepo,
@@ -69,7 +85,7 @@ touched, recorded in its own one-line note. Listed here so the sweep is bounded,
 
 | today | becomes | mechanics |
 |---|---|---|
-| `delegation-triage` (GitHub `loganrooks/delegation-triage`, public) | **`delegate-triage`** | GitHub rename (automatic redirects); local dir; skill + pin + plugin names get transition aliases (§4 P3) |
+| `delegation-triage` (GitHub `loganrooks/delegation-triage`, public) | **`delegate-policy`** (repo); the deployed skill becomes **`delegate-triage`** (act-name) | GitHub rename (automatic redirects); local dir; skill + pin + plugin names get transition aliases (§4 P3) |
 | `delegateops` repo at `Development/delegate-ops` | unchanged | already conformant; umbrella brand holder |
 | `delegation-runtime` | **`delegate-runtime`** | local-only, no remote — one `mv` + reference sweep |
 | `orchestration-learning` (Codex skill + telemetry dir) | **`delegate-learning`** | skill dir rename + alias; **telemetry data dir does NOT move** (the store outlives the code plane; a pointer file marks the new name) — schema stays frozen at v1 per the integration deliberation |
