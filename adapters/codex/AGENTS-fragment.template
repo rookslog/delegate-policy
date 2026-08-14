@@ -1,4 +1,4 @@
-# Delegation-triage consumer note (Codex / non-Claude drivers)
+# Delegate-triage consumer note (Codex / non-Claude drivers)
 
 Generated from the canonical delegate-triage package at `{{PACKAGE_HOME}}` — regenerate via
 `python3 install.py codex` when the package moves.
