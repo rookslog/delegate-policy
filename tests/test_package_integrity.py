@@ -241,7 +241,7 @@ class RepositoryPackageSpecTests(unittest.TestCase):
             destinations_by_source["agents/reviewer-xhigh.md"],
         )
 
-    def test_repository_spec_resolves_the_bounded_sixty_seven_file_package(self):
+    def test_repository_spec_resolves_the_bounded_sixty_eight_file_package(self):
         spec_path = REPO / "adapters" / "claude-code" / "package-spec.json"
         self.assertTrue(spec_path.is_file(), "the reviewed package specification must exist")
         spec = INSTALL.load_package_spec(spec_path)
@@ -249,9 +249,10 @@ class RepositoryPackageSpecTests(unittest.TestCase):
         pairs = INSTALL.claude_code_plan(Path("/tmp/declared-claude-root"), spec)
         sources = [str(source.relative_to(REPO)) for source, _ in pairs]
 
-        # 67 = the 65-file xhigh-override package + the two 2026-08-14 probe records
-        # (family-rename flash legs, S4 crosswalk mapping) swept in by the records glob.
-        self.assertEqual(67, len(pairs))
+        # 68 = the 65-file xhigh-override package + the two 2026-08-14 probe records
+        # (family-rename flash legs, S4 crosswalk mapping) swept in by the records glob
+        # + P-20260724-storage-advisor-b11, adopted 2026-08-14 from a deployed-only copy.
+        self.assertEqual(68, len(pairs))
         self.assertIn("SKILL.md", sources)
         self.assertIn("probes/INDEX.md", sources)
         self.assertIn("probes/records/P-20260731-pst-paired-trial.md", sources)
@@ -259,6 +260,7 @@ class RepositoryPackageSpecTests(unittest.TestCase):
         self.assertIn("probes/records/P-20260807-pin-registration-turn-boundary.md", sources)
         self.assertIn("probes/records/P-20260814-family-rename-flash-legs.md", sources)
         self.assertIn("probes/records/P-20260814-s4-crosswalk-mapping.md", sources)
+        self.assertIn("probes/records/P-20260724-storage-advisor-b11.md", sources)
         self.assertIn("agents/implementer-high.md", sources)
         self.assertIn("agents/reviewer.md", sources)
         self.assertIn("agents/reviewer-max.md", sources)
@@ -311,7 +313,7 @@ class ManifestTests(unittest.TestCase):
         self.assertEqual(1, first["schema_version"])
         self.assertEqual(source_commit, first["source_commit"])
         self.assertFalse(first["dirty_source"])
-        self.assertEqual(67, len(first["entries"]))
+        self.assertEqual(68, len(first["entries"]))
         self.assertEqual(
             sorted(entry["destination"] for entry in first["entries"]),
             [entry["destination"] for entry in first["entries"]],
