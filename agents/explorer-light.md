@@ -1,6 +1,6 @@
 ---
 name: explorer-light
-description: Read-only exploration at sonnet/medium — sweeps, scoping passes, windowed retrieval, and other volume-over-depth lanes. Same claim discipline as explorer (source per claim, declared blind spots). Use when coverage matters more than judgment depth; escalate to explorer (opus/high) for adversarial verification, close-reads of proofs/methods, or synthesis. Cannot write or edit anything. Minted 2026-07-05 as the sonnet-medium probe instrument (routing-table sweeps row); validation = paired probes vs sonnet-high.
+description: Read-only exploration at sonnet/medium — sweeps, scoping passes, windowed retrieval, and other volume-over-depth lanes. ROUTING (operator ruling 2026-08-14, ROUTES R6): sweeps route FIRST to gemini flash 3.7 high via the antigravity CLI (`agy`) — this pin is the no-agy fallback. Same claim discipline as explorer (source per claim, declared blind spots). Use when coverage matters more than judgment depth; escalate to explorer (opus/high) for adversarial verification, close-reads of proofs/methods, or synthesis. Cannot write or edit anything. Minted 2026-07-05 as the sonnet-medium probe instrument (routing-table sweeps row); validation = paired probes vs sonnet-high.
 model: sonnet
 effort: medium
 disallowedTools: Write, Edit, NotebookEdit

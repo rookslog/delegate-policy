@@ -30,22 +30,32 @@ three **registered friction-code vocabulary members** published: `fabricated-com
 `silent-scope-violation`, `undetected-omission` (severe-failure classes; registering them
 makes the pilot's decisive signals exportable instead of free-slot-only).
 
+**Amended 2026-08-14 (v0.2.3), operator-authorized ("propagate the set"):** one additive change —
+**S4 (DelegateOps protocol) is REGISTERED as a prospective source**, S1-style: a row in the
+sources table and nothing else. Per the v0.2 rule, **no mapping cell exists for S4** — its ledger
+is pre-launch (zero live records), so every cell would be sample-free by construction. The mapping
+is the deliverable of a pre-Task-15 probe (LANES row, same date); context and recommendation in
+the [three-strains deliberation](2026-08-14-three-strains-record-standard-deliberation.md). No
+field that existed in v0.2.2 changed meaning; consumers built on v0.2.2 remain correct.
+
 ## 0. What this is
 
 One **intent record** (written at the routing decision point) and one **outcome record**
 (written at completion), specified as a *crosswalk* over the three capture systems that
-already exist — not a fourth competing schema. Producers keep writing their native formats;
+already exist — not a fourth competing schema. **[v0.2.3]** A fourth source, S4, is registered
+below as prospective; the "not a competing schema" commitment binds it identically. Producers keep writing their native formats;
 the crosswalk defines the canonical field, per-source mapping, and the normalization each
 source needs. A record that can be *projected* from a native format is conformant; nothing
 requires rewriting a working writer on day one.
 
-**The three sources:**
+**The sources (S1–S3 measured; S4 registered, mapping owed [v0.2.3]):**
 
 | # | source | native home | status | measured in |
 |---|---|---|---|---|
 | S1 | Claude Code platform OTel | `api_request` / `subagent_completed` events | **prospective — NOT enabled** (`~/.claude/settings.json` env carries no telemetry keys; the probe ran under ad-hoc env vars). Every S1 cell below is a claim about what the stream emits *when enabled*, grounded only in the probe's verbatim attribute blocks. Enablement is a named migration precondition (§6.0) | [P-20260724-otel…](../../probes/records/P-20260724-otel-routing-observability-substrate.md) |
 | S2 | spawn ledger (signal-layer hooks) | `~/.claude/observability/ledger/spawns-*.jsonl` (locator class: `claude-user-dir:`) | live; **two disjoint partitions** (§1a) | portfolio review §0 V5–V10; full payload-key inventory + value samples re-measured 2026-07-24 (panel + adjudicator) |
 | S3 | Codex orchestration-learning v1 | `route_planned` / `disposition` events, allowlist validator | live; 222 events | [P-20260724-codex…](../../probes/records/P-20260724-codex-telemetry-substrate.md); value vocabularies re-measured 2026-07-24 |
+| S4 | DelegateOps protocol (`@delegateops/protocol` decision/plan/outcome records) **[v0.2.3]** | typed schemas + local SQLite store, `~/Development/delegate-ops/delegateops/` (local git, no remote) | **prospective — registered 2026-08-14, ZERO mapping cells** (v0.2 rule: no cell without a value-level sample; the ledger is pre-launch). Mapping = the pre-Task-15 probe deliverable (LANES) | [three-strains deliberation](2026-08-14-three-strains-record-standard-deliberation.md) |
 
 **S3's validator, characterized precisely (panel A4):** the allowlist is closed over field
 NAMES; field VALUES are bounded only by `CODE_RE` (`^[A-Za-z0-9][A-Za-z0-9._:+/@-]{0,127}$`) —

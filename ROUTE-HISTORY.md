@@ -64,3 +64,21 @@ F3); renewal path = the open effort probes.
 **budget-conscious** — deleted 2026-07-25 (batch-C): its deltas predated opus-5 repricing
 ($5/$25, half fable) and the R1/R4/R5/R7 re-routes; one delta had become cost-raising. Re-derive
 from `docs/reviews/2026-07-24-post-opus5-routing-issues.md` #1–#3.
+
+## 2026-08-14 — flash-3.7 exploration ruling (R6; R7 reading legs; R4 candidate)
+
+Operator, in-session (delegate-ops working dir), verbatim: "for our 'routing' gemini flash 3.7
+high beats sonnet every time for exploration. use that, it even might be worth utilizing for
+certain implementation tasks given its speed and cost. … gemini flash through antigravity cli
+(agy)." Applied as: R6 route → **flash 3.7 high via `agy`** (surface `cli`, the crosswalk
+v0.2.2 axis value), sonnet pins retained as the no-agy fallback; R7 exploration/reading legs →
+same; R7's judgment layer, opus escalation, and the sonnet judgment floor unchanged (the
+ruling's stated scope is "exploration"). R4 gains a CANDIDATE note (speed/cost slices) —
+suggestion, not ruling. Precedence basis: explicit operator declaration > table (CONTRACT §2a,
+§5) — delivered and recorded, not argued. Evidence posture: all prior flash evidence is version
+3.6 on the CLIProxyAPI-gateway / antigravity-adapter surfaces (W-026; P-20260731-pst acceptance
+tie) — prior-version, cross-surface priors, neither support nor contradiction for this ruling.
+The operator also named the meta-failure this entry exists to prevent: repeating rulings across
+repos because sessions "never listen." The coupled-edit set (ROUTES + STATE + explorer pins +
+MANIFEST re-hash + redeploy, one commit) is what makes the ruling load-bearing at every spawn —
+the 2026-07-24 canonicality repair (explorer.md) documents what happens when the set is split.
