@@ -1,5 +1,5 @@
 ---
-name: delegation-triage
+name: delegate-triage
 description: |
   Per-spawn triage for ANY delegation in Cowork — solo agent or fan-out. Applies the delegation
   test (whether to delegate at all), classifies the task, looks up the model × effort route
@@ -16,7 +16,7 @@ description: |
 
 # Delegation triage (Cowork build)
 
-Generated from the canonical `delegation-triage` package — version {{VERSION}}, source commit
+Generated from the canonical `delegate-triage` package — version {{VERSION}}, source commit
 {{COMMIT}}. **Do not edit in place**; regenerate via `install.py cowork` and reinstall.
 
 One decision, six steps (full contract in [references/CONTRACT.md](references/CONTRACT.md)):
@@ -27,7 +27,7 @@ One decision, six steps (full contract in [references/CONTRACT.md](references/CO
    delegations that span classes.
 3. **Volatile state — graceful degradation.** This plugin ships NO volatile state by design
    (dates go stale inside an artifact; the rule doesn't). If the consuming project carries a
-   readable delegation-triage `STATE.md` or skill overlay, read it — an entry past its
+   readable delegate-triage `STATE.md` or skill overlay, read it — an entry past its
    `valid_until` is **Unchecked, never true**. Where no readable STATE exists, or a premium
    route's availability/scarcity is Unchecked, **take the row's Fallback column.** Never assume
    a premium window is open because a pin names the model.

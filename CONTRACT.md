@@ -140,7 +140,7 @@ required (it is the decision-surfacing mechanism; the ledger is the audit trail)
 
 ## §5 Overlay convention (reused mechanism, not a new surface)
 
-A consuming project may carry `<repo>/.claude/skill-overlays/delegation-triage.md` with
+A consuming project may carry `<repo>/.claude/skill-overlays/delegate-triage.md` with
 project-local pins, task classes this table lacks, and project-scoped probes. **Most specific
 source wins: overlay > profile > ROUTES.** Overlay rows carry the same discipline — warrant grade
 + flip condition — and post-mortems update the overlay for project classes, this package for

@@ -1,5 +1,5 @@
 ---
-name: delegation-triage
+name: delegate-triage
 description: |
   Per-spawn triage for ANY delegation — solo agent, fleet fan-out, or Workflow. Applies the
   delegation test (whether to delegate at all), classifies the task, looks up the model × effort
@@ -24,7 +24,7 @@ One decision, six steps — full contract in [`CONTRACT.md`](CONTRACT.md):
    parallelism, no isolation need → do it in-session; fixed steps → script.
 2. **Classify** the task to a ROUTES row; split delegations that span classes.
 3. **Route:** [`ROUTES.md`](ROUTES.md) row → active profile deltas ([`STATE.md`](STATE.md)
-   `Active:`) → project overlay (`<repo>/.claude/skill-overlays/delegation-triage.md`; most
+   `Active:`) → project overlay (`<repo>/.claude/skill-overlays/delegate-triage.md`; most
    specific wins). Honor the warrant: Contested/Conjecture/CANDIDATE/PARKED rows are probes to
    run, not priors to trust ([`WARRANTS.md`](WARRANTS.md) by W-ID, on demand).
 4. **State-check:** scarcity mode + expiry (STATE.md). An expired entry is Unchecked — re-verify

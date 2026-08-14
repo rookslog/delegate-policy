@@ -70,4 +70,14 @@ deterministic reference inventory the flash sweep is compared against.
 
 ## Leg log
 
-Appended as executed; each leg one line — surface · actor · result · receipt.
+- P2 GitHub renames · driver · `rookslog/delegate-policy` + `rookslog/delegate-runtime` live, auto-redirects · `gh api PATCH` both 200.
+- P2 local dirs + remotes · driver · both moved, origins re-pointed, 19 pending commits pushed to the renamed remote · `git push` de91ff9..71a6ad7.
+- P2 in-repo self-refs (live surfaces) · driver · scripted + judgment edits per the boundary; LINEAGE rename entry; probes/INDEX name-map note; WARRANTS KNOWN-REPOS (incl. correcting the stale "no remote yet" on the runtime row).
+- P3 skill dirs · driver · `delegate-triage` (×2 harnesses) + `delegate-learn` moved; fail-loud alias stubs at all three old paths; telemetry POINTER.md; act-name registered mid-session.
+- P3 hooks/pins/rules · driver · spawn-triage-guard re-pointed; skill-load-reminder REQUIRED_SKILLS accepts both names for the alias window; flash pins re-hashed in the gateway register; `~/.claude/CLAUDE.md` + `delegation.md` updated.
+- P3 package receipt · driver · manifest regenerated as `delegate-triage-package-manifest.json` from deployed bytes, `dirty_source: true`; `check_wids --scope deployment` 60/60, 11 EXTRA = ratified overlay (pre-existing).
+- P3 flash slice (R4 probe) · flash-3.7-high via agy · runtime-repo docs (3 files): footprint exactly as assigned, zero residuals, judgment calls correct (`delegation_policy` module + `~/.delegation/v2` data plane left); two report claims re-verified against source · CONCORDANT-POSITIVE.
+- P4 flash sweep leg 1 · flash-3.7-high via agy · **agy CLI timeout, no output produced** ("Error: timeout waiting for response") — infrastructure error, not graded as a model result; bounded retry issued (result in the probe record).
+- P4 checker · driver · `check_rename.py` **CLEAN** — zero stale references, all assertions hold. Exit criterion met.
+- Cowork plugin · NOT regenerated this pass (already owed in Housekeeping for the stale ROUTES snapshot; templates updated at source, UI install is an operator step).
+- Known residue: `tests/test_package_integrity.py` rename edits ride uncommitted alongside another session's in-flight modification to the same file (deliberately not committed here to avoid capturing their WIP); the `.claude.json` `skillUsage` history and session stores keep old names as data-plane facts.

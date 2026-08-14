@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""install.py — deploy the delegation-triage package to a consumer surface.
+"""install.py — deploy the delegate-triage package to a consumer surface.
 
 Targets:
   claude-code   copy knowledge surfaces + checks + probes/ into the skill home and roster
@@ -34,7 +34,7 @@ from pathlib import Path, PurePosixPath
 
 PKG = Path(__file__).resolve().parent
 PACKAGE_SPEC = PKG / "adapters" / "claude-code" / "package-spec.json"
-PACKAGE_MANIFEST_NAME = "delegation-triage-package-manifest.json"
+PACKAGE_MANIFEST_NAME = "delegate-triage-package-manifest.json"
 PLUGIN_NAME = "delegation-roster"
 PLUGIN_VERSION_DEFAULT = "0.3.0"
 PLUGIN_REFERENCES = ["ROUTES.md", "CONTRACT.md", "EPISTEMICS.md", "WARRANTS.md"]  # no STATE: by design
@@ -415,9 +415,9 @@ def build_plugin_bytes(version: str) -> bytes:
     entries = [(".claude-plugin/plugin.json",
                 render(PKG / "adapters/cowork-plugin/plugin.json.template", subs).encode())]
     entries += [(f"agents/{p.name}", p.read_bytes()) for p in agent_files()]
-    entries.append(("skills/delegation-triage/SKILL.md",
+    entries.append(("skills/delegate-triage/SKILL.md",
                     render(PKG / "adapters/cowork-plugin/SKILL.template", subs).encode()))
-    entries += [(f"skills/delegation-triage/references/{f}", (PKG / f).read_bytes())
+    entries += [(f"skills/delegate-triage/references/{f}", (PKG / f).read_bytes())
                 for f in PLUGIN_REFERENCES]
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:

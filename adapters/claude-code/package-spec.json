@@ -1,51 +1,51 @@
 {
   "exact_files": [
     {
-      "destination": "skills/delegation-triage/SKILL.md",
+      "destination": "skills/delegate-triage/SKILL.md",
       "source": "SKILL.md"
     },
     {
-      "destination": "skills/delegation-triage/ROUTES.md",
+      "destination": "skills/delegate-triage/ROUTES.md",
       "source": "ROUTES.md"
     },
     {
-      "destination": "skills/delegation-triage/STATE.md",
+      "destination": "skills/delegate-triage/STATE.md",
       "source": "STATE.md"
     },
     {
-      "destination": "skills/delegation-triage/WARRANTS.md",
+      "destination": "skills/delegate-triage/WARRANTS.md",
       "source": "WARRANTS.md"
     },
     {
-      "destination": "skills/delegation-triage/CONTRACT.md",
+      "destination": "skills/delegate-triage/CONTRACT.md",
       "source": "CONTRACT.md"
     },
     {
-      "destination": "skills/delegation-triage/EPISTEMICS.md",
+      "destination": "skills/delegate-triage/EPISTEMICS.md",
       "source": "EPISTEMICS.md"
     },
     {
-      "destination": "skills/delegation-triage/check_state.py",
+      "destination": "skills/delegate-triage/check_state.py",
       "source": "check_state.py"
     },
     {
-      "destination": "skills/delegation-triage/check_wids.py",
+      "destination": "skills/delegate-triage/check_wids.py",
       "source": "check_wids.py"
     },
     {
-      "destination": "skills/delegation-triage/probes/INDEX.md",
+      "destination": "skills/delegate-triage/probes/INDEX.md",
       "source": "probes/INDEX.md"
     },
     {
-      "destination": "skills/delegation-triage/probes/KNOWN-WEAKNESSES.md",
+      "destination": "skills/delegate-triage/probes/KNOWN-WEAKNESSES.md",
       "source": "probes/KNOWN-WEAKNESSES.md"
     },
     {
-      "destination": "skills/delegation-triage/probes/README.md",
+      "destination": "skills/delegate-triage/probes/README.md",
       "source": "probes/README.md"
     },
     {
-      "destination": "skills/delegation-triage/probes/TEMPLATE.md",
+      "destination": "skills/delegate-triage/probes/TEMPLATE.md",
       "source": "probes/TEMPLATE.md"
     },
     {
@@ -63,8 +63,8 @@
     "runtime"
   ],
   "required_integrity_commands": [
-    "python3 check_state.py ROOT/skills/delegation-triage/STATE.md",
-    "python3 check_wids.py --scope deployment --manifest ROOT/delegation-triage-package-manifest.json ROOT",
+    "python3 check_state.py ROOT/skills/delegate-triage/STATE.md",
+    "python3 check_wids.py --scope deployment --manifest ROOT/delegate-triage-package-manifest.json ROOT",
     "python3 install.py claude-code --root ROOT --check"
   ],
   "schema_version": 1,
@@ -139,7 +139,7 @@
       "pattern": "agents/*.md"
     },
     {
-      "destination_prefix": "skills/delegation-triage/probes/records",
+      "destination_prefix": "skills/delegate-triage/probes/records",
       "exclude": [],
       "pattern": "probes/records/*.md"
     }

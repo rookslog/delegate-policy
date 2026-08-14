@@ -1,4 +1,4 @@
-# PROGRAMME — the delegation-triage charter
+# PROGRAMME — the delegate-policy charter
 
 role: charter-by-pointer (direction + pace + adoption; fast state lives in [LANES.md](LANES.md))
 adopts: SEAS ADR-0023 (the programme-charter pattern) — adoption record §3; repo lineage is
@@ -73,7 +73,7 @@ which binds BOTH the order and three doctrine revisions:
 > phase (two L2 workstreams ahead of remaining L1); (b) ROUTES.md demoted from sole
 > route-evidence carrier to commentary-over-evidence, with the selector/profile layer
 > named as a distinct layer above the rollup (unbuilt this phase); (c) the rollup's
-> product home is `delegation-runtime` under D-1 — this repo specifies and consumes.
+> product home is `delegate-runtime` under D-1 — this repo specifies and consumes.
 
 The long-horizon vision is NOT here: it lives at the north star (pointer below) under its
 own amendment discipline. This charter contains the vision by pointer, deliberately

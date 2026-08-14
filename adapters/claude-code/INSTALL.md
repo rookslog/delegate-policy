@@ -11,7 +11,7 @@ writes when `git status --porcelain=v1 -uall` reports any tracked, staged, or un
 the canonical repository. `--check` remains available against a dirty source because it observes
 an existing deployment rather than creating a release.
 
-The install writes `delegation-triage-package-manifest.json` at the Claude installation root. Its
+The install writes `delegate-triage-package-manifest.json` at the Claude installation root. Its
 deterministic entries cover the package-owned skill files, seven roster definitions, and root
 `delegation.md`. The manifest records source and destination paths, source commit, size, mode, and
 SHA-256 without file contents or user-specific absolute paths. It is not its own trust anchor: a
@@ -26,7 +26,7 @@ the installed tree in canonical `agents/MANIFEST.md`.
   integrity. Extra Markdown agent definitions outside the package are reported as `EXTRA`, are not
   made canonical, and are neither failed nor deleted.
 - Standalone deployment validation:
-  `python3 check_wids.py --scope deployment --manifest ROOT/delegation-triage-package-manifest.json ROOT`.
+  `python3 check_wids.py --scope deployment --manifest ROOT/delegate-triage-package-manifest.json ROOT`.
   Intentionally absent repository-only edges are printed exactly as declared `SOURCE_ONLY` edges;
   undeclared, stale, escaping, or unmanifested targets fail closed.
 - The spawn-triage guard (`~/.claude/hooks/spawn-triage-guard.py`) reads the bold

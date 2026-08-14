@@ -1,0 +1,14 @@
+Bounded implementation slice. Edit EXACTLY these three files and nothing else:
+1. /Users/rookslog/Projects/delegate-runtime/README.md
+2. /Users/rookslog/Projects/delegate-runtime/intent-writer/SPEC.md
+3. /Users/rookslog/Projects/delegate-runtime/intent-writer/README.md
+
+Context: on 2026-08-14 these artifacts were renamed. Apply the new names in the three files above:
+- `delegation-runtime` -> `delegate-runtime` (this repo's own name; also in any local path like ~/Projects/delegation-runtime -> ~/Projects/delegate-runtime, and GitHub rookslog/delegation-runtime -> rookslog/delegate-runtime)
+- the `delegation-triage` REPO and its paths -> `delegate-policy` (local path ~/Projects/delegate-policy, GitHub rookslog/delegate-policy)
+- the deployed per-spawn SKILL named `delegation-triage` (e.g. ~/.claude/skills/delegation-triage or "the delegation-triage skill") -> `delegate-triage`
+- the Codex skill `orchestration-learning` -> `delegate-learn`
+EXCEPTION: any reference to the telemetry data path `~/.codex/telemetry/orchestration-learning/` stays EXACTLY as is (the data plane did not move).
+Judgment rule: if an old name appears inside a dated historical quotation or changelog entry recording what something WAS called, leave it; plain live references update. When unsure, update.
+
+Do not reflow paragraphs, do not change any other content, do not rename files, do not touch any file outside the three listed. Report: per-file list of line numbers changed and a one-line note for any occurrence you deliberately left unchanged and why. If a file has zero occurrences, say so.

@@ -1,0 +1,18 @@
+READ-ONLY reference sweep. Do not modify, create, or delete any file.
+
+Context: on 2026-08-14 a family of artifacts was renamed:
+- repo `delegation-triage` -> repo `delegate-policy` (the deployed per-spawn SKILL keeps the act-name `delegate-triage`)
+- repo `delegation-runtime` -> `delegate-runtime`
+- Codex skill `orchestration-learning` -> `delegate-learn`
+EXCEPTION (data plane, intentionally unchanged): the telemetry directory `~/.codex/telemetry/orchestration-learning/` and references to that path.
+
+Task: find every remaining reference to the OLD names (`delegation-triage`, `delegation-runtime`, `orchestration-learning`) in live configuration and documentation OUTSIDE the roots already covered by a deterministic checker. Already covered (skip these): ~/Projects/delegate-policy, ~/Projects/delegate-runtime, ~/.claude/skills, ~/.claude/agents, ~/.claude/hooks, ~/.claude/CLAUDE.md, ~/.claude/delegation.md, ~/.claude/projects/-Users-rookslog-Development-delegate-ops/memory, ~/Development/delegate-ops/delegateops/docs, ~/.codex/skills.
+
+Sweep ONLY these locations, in this order: ~/.codex/config.toml, ~/.codex/AGENTS.md if present, other ~/.codex/*.md; ~/.claude/settings.json and ~/.claude/*.md top-level files; ~/.zshrc and ~/.zprofile; ~/Development/delegate-ops (all text files); any <repo>/.claude/skill-overlays/ directory under ~/Projects or ~/Development (find them by that path pattern, do not sweep whole repos).
+
+For each hit report: absolute path : line number : the matching line (trimmed), and a classification:
+- live-config — a surface that will break or mislead if left stale (needs update)
+- historical — dated records/archives where the old name is a recorded fact (leave)
+- data-plane — telemetry or usage stores (leave)
+
+End with (1) a count summary per classification, (2) an explicit blind-spots declaration: every location you did not or could not check and why. Plain text output, no fabricated completeness claims — if a directory was too large to sweep, say so.

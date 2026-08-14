@@ -5,11 +5,11 @@ with fixed properties. A delegation decision is a system design — model × eff
 (prompt contract, skill, roster pin, review gate) × task. State the fit in one line per spawn
 and record it, so capability questions are answered later from artifacts, not impressions.
 
-**Everything operative lives in the `delegation-triage` skill. Load it for ANY spawn
+**Everything operative lives in the `delegate-triage` skill. Load it for ANY spawn
 decision** — routing (`ROUTES.md`), active profile and scarcity mode (`STATE.md`), the
 procedure, prompt contract, verification rules and instrumentation (`CONTRACT.md`), evidence
-(`WARRANTS.md` + `probes/`). Canonical home: the `delegation-triage` repo (local hint:
-`Projects/delegation-triage` under the home dir); the skill dir AND this file are stamped
+(`WARRANTS.md` + `probes/`). Canonical home: the `delegate-policy` repo (local hint:
+`Projects/delegate-policy` under the home dir); the skill dir AND this file are stamped
 deployments — see its
 `agents/MANIFEST.md`. Post-mortems update the SKILL's surfaces in the same pass, never this
 file.
@@ -23,7 +23,7 @@ spawn decision, something is wrong: load the skill.
 
 ## The one thing that must be true before you load anything
 
-Spawning any subagent, teammate, or Workflow → **load `delegation-triage` first.**
+Spawning any subagent, teammate, or Workflow → **load `delegate-triage` first.**
 
 Generic spawns inherit session effort (observed live 2026-07-10: an intended fable/high
 orchestration ran at session-inherited xhigh through the generic Agent tool). If the route's

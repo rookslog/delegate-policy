@@ -1,6 +1,6 @@
 # Proposal map
 
-This directory contains the design lineage for turning `delegation-triage` from a Claude-family
+This directory contains the design lineage for turning `delegate-policy` (renamed 2026-08-14; see LINEAGE) from a Claude-family
 routing package into a transparent, auditable, research-backed delegation product that can serve
 multiple providers and harnesses.
 
@@ -18,7 +18,7 @@ The portfolio-level review is now the
 [2026-07-24 Fable portfolio decomposition review](../reviews/2026-07-24-portfolio-decomposition-fable-review.md):
 verdict REVISE (two products, not three artifacts), dispositions of the root session's
 recommendations R-A–R-F, four operator decisions (D-1…D-4), and the ordered next-phase
-decomposition. Dispositions: **D-3 decided 2026-07-24** (runtime → its own `delegation-runtime`
+decomposition. Dispositions: **D-3 decided 2026-07-24** (runtime → its own `delegate-runtime`
 repository; D-6 resolved "neither") and **D-1, D-2, D-4 + the north star's §6-as-amended all
 RATIFIED 2026-07-24** after the two-leg review panel — see the
 [decision-panel adjudication](../reviews/2026-07-24-decision-panel-adjudication.md) for the
@@ -50,15 +50,15 @@ carries the ratified direction and current lanes.
 
 | Proposal | Current role | Required disposition |
 |---|---|---|
-| [Consolidated multi-harness control plane](2026-07-21-consolidated-multi-harness-delegation-control-plane.md) | **Superseded on product boundary (D-1 ratified 2026-07-24: two products — doctrine repo + delegation-runtime).** Its layer analysis and learning-plane design remain source material for B-2/B-3. | Mine for the demand+binding rewrite; do not treat its three-artifact boundary as current. |
+| [Consolidated multi-harness control plane](2026-07-21-consolidated-multi-harness-delegation-control-plane.md) | **Superseded on product boundary (D-1 ratified 2026-07-24: two products — doctrine repo + delegate-runtime).** Its layer analysis and learning-plane design remain source material for B-2/B-3. | Mine for the demand+binding rewrite; do not treat its three-artifact boundary as current. |
 | [Cross-runtime routing and Codex-managed Claude delegation](2026-07-17-cross-runtime-routing-and-claude-delegation.md) | Accepted architectural lineage for Codex-managed Claude sessions, provenance, recovery, and bounded delegation. | Preserve its runtime invariants; identify which parts are absorbed by the consolidated product. |
 | [Composable Claude capability and scope policy](2026-07-20-composable-claude-capability-and-scope-policy.md) | Approved direction for provider-neutral policy identity plus Claude-specific compilation. Its C0 core is implemented but non-activating. | Preserve the pure-policy boundary; revise later cohorts around the immediate Claude Code and Codex product horizon. |
 | [Capability-based Claude execution profiles](2026-07-19-capability-based-claude-execution-profiles.md) | Historical profile and runtime-probe baseline, partially superseded by the composable policy. | Retain as evidence; do not treat its fixed profiles as the final public configuration model. |
 | [Deferred provider-neutral router](2026-07-20-provider-neutral-multi-harness-delegation-router-deferred.md) | Earlier decision to preserve an extension seam without building a router. Its reopening triggers now require reassessment. | Decide what the consolidated proposal supersedes and what adapter invariants remain. |
 | [Codex-managed Antigravity adapter](2026-07-20-codex-managed-antigravity-gemini-flash-adapter.md) | Implemented temporary provider slice and evidence about cross-provider reuse. | Treat as migration evidence and a later extension, not the immediate product center. |
 | [Gemini 3.6 Flash pilot](2026-07-26-gemini-flash-36-pilot.md) | **v3 RATIFIED (D-FP-1/2/3, 2026-07-25, two riders) — pilot EXECUTED AND CLOSED 2026-07-31:** paired trial produced NO overlay row (acceptance tie; `probes/records/P-20260731-pst-paired-trial.md`). W-026 is its warrant; XV-1 remains the promotion discipline. | The first live consumer of the intent-writer + crosswalk; its schema-level sol findings seed C-5's interchange-hardening list. |
-| [Family naming](2026-08-14-family-naming.md) | **N-1 RATIFIED + N-2 RESOLVED 2026-08-14 (rev.3):** stem `delegate-` — delegate-ops · **delegate-policy** (this repo; skill keeps the act-name delegate-triage) · delegate-learn · delegate-runtime; Capsule withdrawn, spine = the delegate record standard. P1 availability PASSED (GitHub namespace all free). | Execute migration P2→P4 as a dedicated pass; brand frozen at first npm publish. |
-| [Three-strains record-standard deliberation](2026-08-14-three-strains-record-standard-deliberation.md) | **DRAFT DESIGN INPUT (2026-08-14, non-authorizing)** — DelegateOps × delegation-triage × orchestration-learning integration: converge on a decision-episode record standard, no codebase merge. Arrived with two registrations: crosswalk [v0.2.3] S4 row, LANES probe row. | Probe EXECUTED and [v0.2.4] DISPOSED 2026-08-14 ([P-20260814](../../probes/records/P-20260814-s4-crosswalk-mapping.md)): standard stands; reservations reserved in the crosswalk. Next: Task-15 mapping re-check + the §2a enum publication. |
+| [Family naming](2026-08-14-family-naming.md) | **N-1 RATIFIED + N-2 RESOLVED 2026-08-14 (rev.3):** stem `delegate-` — delegate-ops · **delegate-policy** (this repo; skill keeps the act-name delegate-triage) · delegate-learn · delegate-runtime; Capsule withdrawn, spine = the delegate record standard. P1 availability PASSED (GitHub namespace all free). | Migration P2–P4 EXECUTED 2026-08-14 (docs/reviews/2026-08-14-family-naming-migration-record.md); brand frozen at first npm publish. |
+| [Three-strains record-standard deliberation](2026-08-14-three-strains-record-standard-deliberation.md) | **DRAFT DESIGN INPUT (2026-08-14, non-authorizing)** — DelegateOps × delegate-policy × delegate-learn integration: converge on a decision-episode record standard, no codebase merge. Arrived with two registrations: crosswalk [v0.2.3] S4 row, LANES probe row. | Probe EXECUTED and [v0.2.4] DISPOSED 2026-08-14 ([P-20260814](../../probes/records/P-20260814-s4-crosswalk-mapping.md)): standard stands; reservations reserved in the crosswalk. Next: Task-15 mapping re-check + the §2a enum publication. |
 
 ## Active contract proposal
 

@@ -16,8 +16,11 @@ crosswalk already says). N-3 (signal-layer sovereign) and N-4 (peripherals out o
 as unopposed recommendations. **P1 availability measurement PASSED 2026-08-14**: GitHub
 `loganrooks/{delegate-policy,delegate-learn,delegate-runtime,delegate-triage,delegate-ops}` all
 404; no local dir collisions; npm not implicated (only `delegateops` publishes, OI-1).
-**Migration P2–P4 pending — staged as a dedicated pass** (renames touch live deployed surfaces;
-not executed from the tail of a long session). Filed 2026-08-14 on operator instruction ("lets do the family renaming first, draft the
+**Migration P2–P4 EXECUTED 2026-08-14, same day** (operator discharged the fresh-session
+staging condition via manual compaction; execution evidence + two plan-of-record corrections —
+GitHub owner is `rookslog` not `loganrooks`, and `delegation-runtime` had a public remote —
+in the [migration record](../reviews/2026-08-14-family-naming-migration-record.md); exit
+criterion `check_rename.py` CLEAN). Filed 2026-08-14 on operator instruction ("lets do the family renaming first, draft the
 naming proposal"), following the packaging deliberation (this session; alternatives + steelmen
 delivered in-chat, summarized in §5). This proposal is deliberately the **cheap, reversible
 first move** from that deliberation: renaming forecloses no structural option (monorepo,

@@ -3,7 +3,7 @@
   "name": "delegation-roster",
   "displayName": "Delegation Roster",
   "version": "{{VERSION}}",
-  "description": "Delegation-triage roster and routing skill, generated from the canonical delegation-triage package (source commit {{COMMIT}}). Do not edit in place — regenerate via install.py cowork.",
+  "description": "Delegate-triage roster and routing skill, generated from the canonical delegate-triage package (source commit {{COMMIT}}). Do not edit in place — regenerate via install.py cowork.",
   "author": {
     "name": "Logan Rooks"
   },

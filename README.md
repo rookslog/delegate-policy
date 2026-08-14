@@ -1,4 +1,4 @@
-# delegation-triage
+# delegate-policy
 
 **Evidence-graded model routing for multi-agent LLM systems — a working instrument, published
 with its lab notebook.**

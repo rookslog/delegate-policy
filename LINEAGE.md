@@ -41,3 +41,21 @@ deployments stamped in `agents/MANIFEST.md`.
 | `adapters/claude-code/` | skill + agents install into `~/.claude` (guard hook pre-existing) | scripted (`install.py claude-code`; INSTALL.md documents) |
 | `adapters/cowork-plugin/` | generated plugin zip — replaces the 2026-07-10 GPT-5.6-Pro fork as the Cowork surface; ships no volatile state (graceful degradation, project-side STATE) | built (`install.py cowork` → `dist/`; 0.3.0) |
 | `adapters/codex/` | consumer guidance fragment ("read ROUTES/STATE before delegating to Claude") | built (`install.py codex`; template in-dir) |
+
+
+## 2026-08-14 — family rename: `delegation-triage` → `delegate-policy`
+
+Identity change, provenance event ([family-naming proposal](docs/proposals/2026-08-14-family-naming.md),
+N-1 RATIFIED rev.3; execution: [migration record](docs/reviews/2026-08-14-family-naming-migration-record.md)).
+Name map for everything dated before this entry:
+
+| old | new |
+|---|---|
+| `delegation-triage` (repo, GitHub `rookslog/delegation-triage`) | `delegate-policy` (GitHub auto-redirects hold) |
+| `delegation-triage` (deployed per-spawn skill) | `delegate-triage` (act-name; the repo holds the artifact — policy — the skill performs the act) |
+| `delegation-runtime` (repo) | `delegate-runtime` |
+| `orchestration-learning` (Codex skill, code plane) | `delegate-learn` |
+| `~/.codex/telemetry/orchestration-learning/` (data plane) | **unchanged** — the store outlives the code plane |
+
+Historical records (probes, ROUTE-HISTORY, reviews, dated proposals, warrant bodies) are NOT
+rewritten; old names there are recorded facts resolving through this table.

@@ -4,12 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-The canonical home of the `delegation-triage` package: evidence-graded routing doctrine for
+The canonical home of the `delegate-triage` package: evidence-graded routing doctrine for
 delegating work to subagents (model × effort routes), the canonical agent roster, and the
 package's own evidence loop. It is almost entirely Markdown plus stdlib-only Python scripts
 (two checks + a multi-target installer). No dependencies, no test framework — the check scripts
 ARE the CI (`.github/workflows/ci.yml` runs them as build gates on every push/PR to `main`;
-note an expired STATE.md entry fails CI by design). Public repo (`loganrooks/delegation-triage`,
+note an expired STATE.md entry fails CI by design). Public repo (`rookslog/delegate-policy`,
 MIT); releases are tag-driven (`v*` → CI builds the Cowork plugin and attaches it). `dist/` and
 `.planning/` are untracked (generated output / maintainer drafts).
 
@@ -112,7 +112,7 @@ manifest table in the same commit.
 - **Commit coupling — tracked changes that depend on untracked trees (review D-6, RESOLVED
   2026-07-24 as "neither"):** the instance — an uncommitted `ci.yml` adapter-test step requiring
   the untracked `adapters/codex/**` runtime trees — was resolved by operator decision D-3: the
-  runtime moved to its own repo (`delegation-runtime:` in the WARRANTS KNOWN-REPOS key) taking
+  runtime moved to its own repo (`delegate-runtime:` in the WARRANTS KNOWN-REPOS key) taking
   the CI step with it; the `ci.yml` edit was reverted here. The general rule stands: before
   committing, check whether a tracked change references a path `git ls-files` does not return —
   land them in one commit or neither.

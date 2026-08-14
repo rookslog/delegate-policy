@@ -18,7 +18,7 @@ REPO = Path(__file__).resolve().parent
 
 OLD_NAMES = re.compile(r"delegation-triage|delegation-runtime|orchestration-learning")
 # Data-plane exception: the telemetry store does not move; references to its path are valid.
-DATA_PLANE_OK = re.compile(r"telemetry/orchestration-learning")
+DATA_PLANE_OK = re.compile(r"telemetry[\"'\s/\\]{0,8}orchestration-learning")
 
 # Live surface roots. Roots that do not exist yet (pre-rename) are skipped silently.
 ROOTS = [
@@ -29,6 +29,8 @@ ROOTS = [
     HOME / ".claude/agents",
     HOME / ".claude/hooks",
     HOME / ".claude/CLAUDE.md",
+    HOME / ".claude/vendor-facts.md",
+    HOME / ".codex/config.toml",
     HOME / ".claude/delegation.md",
     HOME / ".claude/projects/-Users-rookslog-Development-delegate-ops/memory",
     HOME / "Development/delegate-ops/delegateops/docs",
@@ -51,6 +53,8 @@ ALLOW = [
     "/docs/proposals/",              # dated decision docs; README.md asserted clean below
     "/dist/",                        # recorded builds, regenerate-not-edit
     "/check_rename.py",
+    "/.claude/hooks/skill-load-reminder.py",  # REQUIRED_SKILLS alias window — un-allowlist when the stubs retire
+    "/memory/delegate-family-naming.md",      # carries the old->new rename map by design
     "/adapters/cowork-plugin/README.md",  # build lineage notes (version continuity for Cowork UI)
     "/.claude/skills/delegation-triage/SKILL.md",   # transition alias stub
     "/.codex/skills/delegation-triage/SKILL.md",    # transition alias stub
@@ -98,7 +102,7 @@ def main() -> int:
             for i, line in enumerate(text.splitlines(), 1):
                 for m in OLD_NAMES.finditer(line):
                     span = line[max(0, m.start() - 30):m.end() + 30]
-                    if DATA_PLANE_OK.search(line[max(0, m.start() - 10):m.end()]):
+                    if DATA_PLANE_OK.search(line[max(0, m.start() - 30):m.end()]):
                         continue
                     failures.append(f"{f}:{i}: …{span.strip()}…")
 

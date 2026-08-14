@@ -124,7 +124,7 @@ def validate_deployment(installation_root, manifest_path, stamp_path):
             continue
         destinations.add(destination_value)
         sources.add(source_value)
-        if destination.parts[:2] == ("skills", "delegation-triage"):
+        if destination.parts[:2] == ("skills", "delegate-triage"):
             expected_skill.add(destination_value)
         elif destination.parts[:1] == ("agents",):
             expected_agents.add(destination_value)
@@ -156,7 +156,7 @@ def validate_deployment(installation_root, manifest_path, stamp_path):
             result.failures.append(f"mode mismatch: {destination_value}")
 
     result.checked_files = len(entries)
-    skill_root = root / "skills" / "delegation-triage"
+    skill_root = root / "skills" / "delegate-triage"
     actual_skill = set()
     if skill_root.is_dir():
         for path in skill_root.rglob("*"):
@@ -235,7 +235,7 @@ def validate_deployment(installation_root, manifest_path, stamp_path):
     for source, target in sorted(declarations - observed_edges):
         result.failures.append(f"declared source-only edge is not present: {source} -> {target}")
 
-    warrants_path = markdown_files.get("skills/delegation-triage/WARRANTS.md")
+    warrants_path = markdown_files.get("skills/delegate-triage/WARRANTS.md")
     defined = set()
     if warrants_path:
         defined = set(WID_DEF_RE.findall(warrants_path.read_text(encoding="utf-8")))
@@ -243,7 +243,7 @@ def validate_deployment(installation_root, manifest_path, stamp_path):
         result.failures.append("no W-records defined in packaged WARRANTS.md")
     used = set()
     for destination, path in markdown_files.items():
-        if destination != "skills/delegation-triage/WARRANTS.md":
+        if destination != "skills/delegate-triage/WARRANTS.md":
             used |= set(WID_USE_RE.findall(path.read_text(encoding="utf-8")))
     for wid in sorted(used - defined):
         result.failures.append(f"packaged cited but undefined W-ID: {wid}")

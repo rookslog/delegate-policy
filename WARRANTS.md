@@ -16,6 +16,10 @@ a row** [W-019].
 
 ## KNOWN-REPOS locator key (repo-qualified prefixes; identity = name + origin, hints are env-specific)
 
+This repo itself renamed 2026-08-14: `delegation-triage` → `delegate-policy` (GitHub redirects
+hold; deployed skill keeps the act-name `delegate-triage`). Prefixes in historical warrant
+bodies resolve through this note + LINEAGE.
+
 | prefix | repo (origin remote) | local hint (this machine) |
 |---|---|---|
 | `bridgewright:` | loganrooks/bridgewright-discovery | ~/Development/bridgewright |
@@ -26,7 +30,7 @@ a row** [W-019].
 | `SEAS:` | loganrooks/SelfEvolvingAgentialSystems | ~/Projects/SelfEvolvingAgentialSystems |
 | `claude-user-dir:` | (untracked user dir — deployment target, weakest provenance class) | ~/.claude |
 | `routing-evidence:` | (no remote — local-only, flagged) | ~/Projects/routing-evidence |
-| `delegation-runtime:` | (no remote yet — local-only, flagged; Product 2 of the 2026-07-24 split, moved out per portfolio-review D-3) | ~/Projects/delegation-runtime |
+| `delegate-runtime:` | rookslog/delegate-runtime (public; renamed from `delegation-runtime` 2026-08-14 — the "no remote" note this row carried was stale, a remote existed pre-rename) | ~/Projects/delegate-runtime |
 | `storage-advisor:` | (no remote — local-only, flagged) | ~/Development/storage-advisor |
 | `lectern:` | (no remote — local-only, flagged) | ~/Development/lectern |
 | `bibliometa-cli:` | (no remote — local-only, flagged) | ~/Development/bibliometa-cli |
@@ -37,8 +41,8 @@ a row** [W-019].
 pilot-closure package A′ — gateway-only pins stay out of the public package; identity =
 content hash; availability predicate: gateway (`claudex`) session; on hash mismatch the
 citing evidence reads Unchecked until re-verified):** hashed 2026-07-31 post-amendment —
-flash-executor-high `868bff77fc142c8457f5f26d500307affce6f9f6ef412211c7e8e7a1b402ed23` ·
-flash-implementer `8b2b2db356c9392c143c658363be908b021f564dd3b1b42cc5a659784df7aa98` ·
+flash-executor-high `80f947e0135b64cd37967db3207bf4296f62a94a1622653b3d5ac74fae680bf8` (re-hashed 2026-08-14: probe-record path citations follow the repo rename, description-only edit; was 868bff77…) ·
+flash-implementer `21612cecb4c49aeccb38f102085b4324672e5abe6b75b3d0a621b0fe7006125b` (re-hashed 2026-08-14, same rename edit; was 8b2b2db3…) ·
 sol-orchestrator `ab55d1db1f330d482c72d7eb13d9a982e41a353438be842e9465d9cee250e777` ·
 luna-explorer `7ae47189f63d4875e765a0dd32f3ba60a7d31ad4311a0d89566d73505a8135e9` ·
 terra-explorer `5f211c8428bf094da126d6a577e7aef38633300d397b9300ed0e72dbb5875375`.
