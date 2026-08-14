@@ -18,7 +18,10 @@ REPO = Path(__file__).resolve().parent
 
 OLD_NAMES = re.compile(r"delegation-triage|delegation-runtime|orchestration-learning")
 # Data-plane exception: the telemetry store does not move; references to its path are valid.
-DATA_PLANE_OK = re.compile(r"telemetry[\"'\s/\\]{0,8}orchestration-learning")
+# s3-orchestration-learning: the projector's ORIGIN namespace (2026-08-14) — a record
+# keying string derived from the unrenamed data plane; renaming it would fragment
+# (origin, run_id) keying across projected stores.
+DATA_PLANE_OK = re.compile(r"telemetry[\"'\s/\\]{0,8}orchestration-learning|s3-orchestration-learning")
 
 # Live surface roots. Roots that do not exist yet (pre-rename) are skipped silently.
 ROOTS = [
