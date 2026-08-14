@@ -3,3 +3,6 @@ dist/
 .DS_Store
 .claude/settings.local.json
 __pycache__/
+# P-20260720 fixture is a deliberately NESTED git repo ("non-product fixture",
+# its own README) — untrackable by design; bytes stay on disk as probe evidence.
+probes/fixtures/P-20260720-claude-profile-activation/
