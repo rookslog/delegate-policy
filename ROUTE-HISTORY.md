@@ -82,3 +82,13 @@ The operator also named the meta-failure this entry exists to prevent: repeating
 repos because sessions "never listen." The coupled-edit set (ROUTES + STATE + explorer pins +
 MANIFEST re-hash + redeploy, one commit) is what makes the ruling load-bearing at every spawn —
 the 2026-07-24 canonicality repair (explorer.md) documents what happens when the set is split.
+
+**Addendum, same day (operator, mid-probe):** "the routing is preliminary / experimental, and so
+there should be more thorough checks and monitoring around the work it does, at least temporarily
+until we have a more solid understanding of its limits, potentialities, capacities, etc as
+interpreted / read from the research report, the benchmarking data (beyond the simple quantified
+and aggregated metrics)." Encoded as the PROBATIONARY regime in STATE `exploration-route-flash`
+(per-leg re-derivation, completeness check, qualitative fidelity note, 3-attested-per-class or
+operator review to clear; 30-day review date). First graded instance: P-20260814-s4-crosswalk-mapping
+F7 — high fidelity on delivered content, truncated delivery with blind-spots section undelivered
+and undeclared.

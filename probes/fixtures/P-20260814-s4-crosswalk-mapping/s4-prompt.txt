@@ -1,0 +1,11 @@
+You are a read-only schema-extraction leg for a routing-evidence probe. Workspace: the s4-head directory (a clean git-HEAD export of the DelegateOps protocol package, commit in EXPORTED_AT_COMMIT.txt).
+
+Task: produce a COMPLETE field inventory of the DelegateOps decision/outcome record surfaces. Read packages/protocol/src/decision.ts, execution.ts, resources.ts, evidence.ts, plan.ts, objective.ts, provider-state.ts, events.ts, and docs/schemas/delegateops-v0alpha1.schema.json.
+
+Return raw structured markdown (your final text IS the deliverable, no preamble):
+1. For each record/interface relevant to a delegation DECISION (the routing choice: candidates, chosen recipe, policy version, reasons) and its OUTCOME (verification, adjudication, disposition, rework, costs): list every field with its type, whether optional, and a one-word classification: CODE (enum/id/number/boolean - safe for privacy-stripped export) or CONTENT (free text, prompt, path, artifact - content-bearing).
+2. List the enum vocabularies verbatim for: disposition/outcome-like enums, candidate/recipe kinds, reason codes, verification outcomes, and any policy/experiment types (especially anything named PolicyDecision or similar).
+3. List every field that presupposes a SINGLE decision-maker or single root (for example a required singular root/parent/authority field with no multi-writer affordance) - quote the field and file.
+4. List fields recording SITUATION at decision time: budgets, resource envelopes, provider/capacity state, time constraints, context snapshots.
+5. Declare files you did not read.
+Cite file and line for every claim. Do not modify anything.

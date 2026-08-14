@@ -70,13 +70,38 @@ one decision-maker** (checked during the probe below; Unchecked today).
    and S4's protocol fields onto the crosswalk spine, with value-level samples where live data
    exists; run the single-decision-maker grep. **Flip condition:** if the privacy-stripped
    projection of a content-rich S4 record loses the fields learning needs, the standard is
-   premature and the looser adapter-per-pair coupling is correct.
+   premature and the looser adapter-per-pair coupling is correct. **EXECUTED same day:
+   [P-20260814-s4-crosswalk-mapping](../../probes/records/P-20260814-s4-crosswalk-mapping.md) —
+   flip condition NOT met; the standard stands; [v0.2.4] reservations recommended (candidates[],
+   assignment{}, situation{}, surface members), disposition owed.**
 3. **At Task 15** (run export + policy-analysis seed): implement the export projection against
    the reconciled spine. The `PolicyDecision` namespace collision (DelegateOps: experiment
    assignment; S3: human-reviewed promotion) is resolved there, not papered over.
 4. **Not now:** an R&D-department project and a portfolio meta-coordinator are consumers of the
    waist; minting either before the standard exists means building against four incompatible
    schemas. The PROGRAMME/LANES pace-layer pattern is the template when one is minted.
+
+## 5. Operator direction (2026-08-14, post-filing — binds the probe's scope, not a ratification)
+
+Recorded verbatim-in-substance from the same session: the routing-policy **mechanism** is
+expected to change radically, away from markdown tables — "the routing policy table should be
+conditioned / determined by the relevant / salient aspects of a given situation": what's the
+budget, what models are available, how much usage remains on the different plans, cost budget,
+time budget, soft and hard constraints. It should also "potentially support different
+routing-determining paradigms, and routing paradigms where research shows promise."
+
+Consequence for the record standard (this is why the note lives here): the spine must capture
+the **situation at decision time** — resource state, availability, quotas, constraint sets — as
+first-class fields, not only the chosen route. A policy conditioned on situation is only
+learnable and replayable if the situation was recorded. This converges with three existing
+surfaces: DelegateOps' task-shape + resource/authority envelopes (constitution §8.1), the
+packet's decision-episode definition ("task state × … × resource regime × time") and its
+resource-regime vocabulary (SCARCE/NORMAL/ABUNDANT/CONTROLLED_BURN/…), and STATE.md's
+scarcity-mode (a one-flag ancestor of the same idea). The markdown table is thereby re-read as
+what it always was operationally: a hand-compiled cache of a conditional policy — the standard
+should record the condition inputs so future mechanisms (learned, market, team-negotiated,
+whatever research supports) can be evaluated against the same records. The pre-Task-15 probe
+(§4.2) gains a fourth check: does the spine carry a situation/constraint axis at all?
 
 Packet items worth pulling in when their surfaces are next touched: shadow-mode-first learned
 routing with logged propensities and candidate sets; verifier non-independence (a second LLM
