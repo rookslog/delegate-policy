@@ -48,6 +48,7 @@ This is where delegations silently go wrong. Surfaces, by what they can actually
 | Workflow `agent()` | per-call | per-call | the ONLY per-call surface for both knobs; promote to a Workflow when no pin matches a non-default pair |
 | Roster pin (`agents/`) | frontmatter | frontmatter | immune to session effort; prefer when a pin matches |
 | Generic Agent tool | per-call | **INHERITED from session** | acceptable only when session effort ≈ route effort — otherwise the wrong surface *by construction* (observed firing 2026-07-10: intended fable/high ran at session-inherited xhigh) |
+| `delegate-to-antigravity` adapter (delegate-runtime) | per-call, validated against a fresh `agy models` listing | encoded in the model id (`gemini-3.7-flash-{low,medium,high}`) | cross-vendor Gemini legs (R6/R7 exploration; R4 CANDIDATE slices). Hardened 2026-08-14: stream-json telemetry (conversation_id, provider_status, total_tokens, permission_suspect) + append-only jobs ledger; implementation profile writes only a detached worktree, `--dangerously-skip-permissions` removed (upstream antigravity-cli issue #36). Exit 0 / `SUCCESS` is worker evidence, not acceptance — G1–G4 apply (adapter SKILL.md); see STATE `agy-adapter-invocation` |
 
 Rules: never assume a generic spawn's effort; fit lines state effort **as delivered by the
 surface**, not as intended. In Cowork, only generic surfaces exist — say "effort:
