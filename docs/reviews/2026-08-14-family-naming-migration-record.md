@@ -81,3 +81,7 @@ deterministic reference inventory the flash sweep is compared against.
 - P4 checker · driver · `check_rename.py` **CLEAN** — zero stale references, all assertions hold. Exit criterion met.
 - Cowork plugin · NOT regenerated this pass (already owed in Housekeeping for the stale ROUTES snapshot; templates updated at source, UI install is an operator step).
 - Known residue: `tests/test_package_integrity.py` rename edits ride uncommitted alongside another session's in-flight modification to the same file (deliberately not committed here to avoid capturing their WIP); the `.claude.json` `skillUsage` history and session stores keep old names as data-plane facts.
+
+**Closing stamp:** main-pass commit `5592d02` (pushed to `rookslog/delegate-policy`); runtime
+side `224da1b`; delegateops side `bc4e695`. The MANIFEST preview-class deploy row resolves its
+"commit id in the migration record" pointer here.
