@@ -128,6 +128,11 @@
       "reason": "proposal remains in the canonical repository",
       "source": "probes/records/P-20260726-flash-pilot-panel.md",
       "target": "../../docs/proposals/2026-07-24-intent-outcome-record-crosswalk.md"
+    },
+    {
+      "reason": "proposal remains in the canonical repository",
+      "source": "probes/records/P-20260814-s4-crosswalk-mapping.md",
+      "target": "../../docs/proposals/2026-08-14-three-strains-record-standard-deliberation.md"
     }
   ],
   "tracked_globs": [

@@ -9,7 +9,7 @@ Operator has seen and approved the *filing*; the recommendation itself awaits it
 ## 1. The question
 
 How should DelegateOps (execution ledger / delegation-verification product,
-`~/Development/delegate-ops/delegateops/`, local git only) integrate with delegation-triage
+`~/Development/delegate-ops/delegateops/` — local hint, local git only) integrate with delegation-triage
 (this repo) and orchestration-learning (Codex telemetry skill,
 `~/.codex/skills/orchestration-learning/`)? Should the three merge? A codex (gpt-5.6 sol high)
 answer recommended a pipeline with pairwise adapters; the operator found it factually sound
@@ -41,7 +41,7 @@ decentralized/peer agent teams).
   (line 612), telemetry stays local (line 1030), no framework enters the public protocol
   (line 1173).
 - An external research packet (GPT-5.6 Sol Pro, uncommitted, at
-  `~/Projects/research-packets/2026-08-14-adaptive-agentic-orchestration/`) independently
+  `~/Projects/research-packets/2026-08-14-adaptive-agentic-orchestration/`, local hint) independently
   converges: "the defensible unit of control is a decision episode," hybrid governed topology
   with peer mechanisms as policy-selectable local structure. Digest verdict: disciplined
   literature synthesis + two small reanalyses; 3/3 spot-checked citations resolved; zero

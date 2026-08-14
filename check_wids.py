@@ -359,9 +359,13 @@ def main(argv):
         # third-party evidence, preserved verbatim, whose internal links resolve only in the
         # companion evidence store (see each dir's PROVENANCE.md). Verbatim fidelity of an
         # external record beats internal link resolution; corrections live in the citing W-record.
+        # 2026-08-14: probe FIXTURES exempt on the same principle — verbatim subagent output
+        # captured as evidence; its paths point at the producing session's environment and
+        # must not be edited to conform. The citing probe RECORD stays fully checked.
         if ("references/ARCHIVE" in str(rel)
                 or str(rel) == "references/routing-table.md"
-                or str(rel).startswith("docs/research/external/")):
+                or str(rel).startswith("docs/research/external/")
+                or str(rel).startswith("probes/fixtures/")):
             continue
         if f.name != "WARRANTS.md":
             used |= set(WID_USE_RE.findall(text))

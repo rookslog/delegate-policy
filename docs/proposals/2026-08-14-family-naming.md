@@ -80,7 +80,7 @@ micro-kernel structural question by naming — same error as N-1 option C.)
 
 ### N-4 — Peripheral directories
 
-`~/Projects/routing-evidence`, `~/Projects/agent-provenance`, `~/Projects/AgenticOpsResearch`
+`~/Projects/routing-evidence`, `~/Projects/agent-provenance`, `~/Projects/AgenticOpsResearch` (local hint)
 and similar are **out of scope** — each gets an absorb-or-archive disposition when next
 touched, recorded in its own one-line note. Listed here so the sweep is bounded, not implied.
 

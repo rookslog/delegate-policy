@@ -17,8 +17,8 @@ history do not move or get rewritten.
 | # | surface | old | new | phase |
 |---|---|---|---|---|
 | 1 | GitHub repo (public) | `rookslog/delegation-triage` | `rookslog/delegate-policy` | P2 |
-| 2 | local dir | `~/Projects/delegation-triage` | `~/Projects/delegate-policy` | P2 |
-| 3 | GitHub repo + local dir | `rookslog/delegation-runtime` + `~/Projects/delegation-runtime` | `rookslog/delegate-runtime` + `~/Projects/delegate-runtime` | P2 |
+| 2 | local dir (local hint) | `~/Projects/delegation-triage` | `~/Projects/delegate-policy` | P2 |
+| 3 | GitHub repo + local dir (local hint) | `rookslog/delegation-runtime` + `~/Projects/delegation-runtime` | `rookslog/delegate-runtime` + `~/Projects/delegate-runtime` | P2 |
 | 4 | in-repo self-references, live surfaces only | `delegation-triage` etc. | new names | P2 |
 | 5 | deployed Claude skill | `~/.claude/skills/delegation-triage/` | `~/.claude/skills/delegate-triage/` + transition alias stub at the old name | P3 |
 | 6 | deployed Codex skill | `~/.codex/skills/delegation-triage/` | `~/.codex/skills/delegate-triage/` + alias stub | P3 |

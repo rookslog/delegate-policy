@@ -93,11 +93,11 @@ class PackagePlanTests(unittest.TestCase):
             "exact_files": [
                 {
                     "source": "SKILL.md",
-                    "destination": "skills/delegation-triage/SKILL.md",
+                    "destination": "skills/delegate-triage/SKILL.md",
                 },
                 {
                     "source": "probes/README.md",
-                    "destination": "skills/delegation-triage/probes/README.md",
+                    "destination": "skills/delegate-triage/probes/README.md",
                 },
                 {
                     "source": "adapters/claude-code/delegation.md",
@@ -112,7 +112,7 @@ class PackagePlanTests(unittest.TestCase):
                 },
                 {
                     "pattern": "probes/records/*.md",
-                    "destination_prefix": "skills/delegation-triage/probes/records",
+                    "destination_prefix": "skills/delegate-triage/probes/records",
                     "exclude": [],
                 },
             ],
@@ -120,8 +120,8 @@ class PackagePlanTests(unittest.TestCase):
             "forbidden_names": [".DS_Store", "prompt.md"],
             "source_only_links": [],
             "required_integrity_commands": [
-                "python3 check_state.py ROOT/skills/delegation-triage/STATE.md",
-                "python3 check_wids.py --scope deployment --manifest ROOT/delegation-triage-package-manifest.json ROOT",
+                "python3 check_state.py ROOT/skills/delegate-triage/STATE.md",
+                "python3 check_wids.py --scope deployment --manifest ROOT/delegate-triage-package-manifest.json ROOT",
                 "python3 install.py claude-code --root ROOT --check",
             ],
         }
@@ -164,9 +164,9 @@ class PackagePlanTests(unittest.TestCase):
             [
                 "agents/reviewer.md",
                 "delegation.md",
-                "skills/delegation-triage/SKILL.md",
-                "skills/delegation-triage/probes/README.md",
-                "skills/delegation-triage/probes/records/tracked.md",
+                "skills/delegate-triage/SKILL.md",
+                "skills/delegate-triage/probes/README.md",
+                "skills/delegate-triage/probes/records/tracked.md",
             ],
             actual,
         )
@@ -201,7 +201,7 @@ class PackagePlanTests(unittest.TestCase):
     def test_plan_rejects_symlink_source(self):
         spec = self._base_spec()
         spec["exact_files"].append(
-            {"source": "linked.md", "destination": "skills/delegation-triage/linked.md"}
+            {"source": "linked.md", "destination": "skills/delegate-triage/linked.md"}
         )
         spec_path = self._commit_fixture(spec)
         os.symlink("SKILL.md", self.repo / "linked.md")
@@ -213,7 +213,35 @@ class PackagePlanTests(unittest.TestCase):
 
 
 class RepositoryPackageSpecTests(unittest.TestCase):
-    def test_repository_spec_resolves_the_bounded_sixty_file_package(self):
+    def test_operator_xhigh_review_override_is_documented_and_deliverable(self):
+        contract = (REPO / "CONTRACT.md").read_text(encoding="utf-8")
+        routes = (REPO / "ROUTES.md").read_text(encoding="utf-8")
+        reviewer_xhigh = (REPO / "agents" / "reviewer-xhigh.md").read_text(encoding="utf-8")
+
+        self.assertIn("### §2a Operator declaration overrides the route", contract)
+        self.assertIn("An explicitly declared model, effort, or pin", contract)
+        self.assertIn("Record the override in the fit line", contract)
+        self.assertIn(
+            "explicit operator declaration > project overlay > profile delta > this table",
+            routes,
+        )
+        self.assertRegex(reviewer_xhigh, r"(?m)^name: reviewer-xhigh$")
+        self.assertRegex(reviewer_xhigh, r"(?m)^model: opus$")
+        self.assertRegex(reviewer_xhigh, r"(?m)^effort: xhigh$")
+
+        spec_path = REPO / "adapters" / "claude-code" / "package-spec.json"
+        spec = INSTALL.load_package_spec(spec_path)
+        pairs = INSTALL.claude_code_plan(Path("/tmp/declared-claude-root"), spec)
+        destinations_by_source = {
+            str(source.relative_to(REPO)): str(destination)
+            for source, destination in pairs
+        }
+        self.assertEqual(
+            "/tmp/declared-claude-root/agents/reviewer-xhigh.md",
+            destinations_by_source["agents/reviewer-xhigh.md"],
+        )
+
+    def test_repository_spec_resolves_the_bounded_sixty_seven_file_package(self):
         spec_path = REPO / "adapters" / "claude-code" / "package-spec.json"
         self.assertTrue(spec_path.is_file(), "the reviewed package specification must exist")
         spec = INSTALL.load_package_spec(spec_path)
@@ -221,11 +249,20 @@ class RepositoryPackageSpecTests(unittest.TestCase):
         pairs = INSTALL.claude_code_plan(Path("/tmp/declared-claude-root"), spec)
         sources = [str(source.relative_to(REPO)) for source, _ in pairs]
 
-        self.assertEqual(60, len(pairs))
+        # 67 = the 65-file xhigh-override package + the two 2026-08-14 probe records
+        # (family-rename flash legs, S4 crosswalk mapping) swept in by the records glob.
+        self.assertEqual(67, len(pairs))
         self.assertIn("SKILL.md", sources)
         self.assertIn("probes/INDEX.md", sources)
         self.assertIn("probes/records/P-20260731-pst-paired-trial.md", sources)
+        self.assertIn("probes/records/P-20260805-effort-surface-and-pin-registration.md", sources)
+        self.assertIn("probes/records/P-20260807-pin-registration-turn-boundary.md", sources)
+        self.assertIn("probes/records/P-20260814-family-rename-flash-legs.md", sources)
+        self.assertIn("probes/records/P-20260814-s4-crosswalk-mapping.md", sources)
+        self.assertIn("agents/implementer-high.md", sources)
         self.assertIn("agents/reviewer.md", sources)
+        self.assertIn("agents/reviewer-max.md", sources)
+        self.assertIn("agents/reviewer-xhigh.md", sources)
         self.assertIn("adapters/claude-code/delegation.md", sources)
         self.assertNotIn("agents/MANIFEST.md", sources)
         self.assertFalse(any("fixtures" in Path(source).parts for source in sources))
@@ -234,8 +271,8 @@ class RepositoryPackageSpecTests(unittest.TestCase):
         self.assertFalse(any(Path(source).name == "prompt.md" for source in sources))
         self.assertEqual(
             [
-                "python3 check_state.py ROOT/skills/delegation-triage/STATE.md",
-                "python3 check_wids.py --scope deployment --manifest ROOT/delegation-triage-package-manifest.json ROOT",
+                "python3 check_state.py ROOT/skills/delegate-triage/STATE.md",
+                "python3 check_wids.py --scope deployment --manifest ROOT/delegate-triage-package-manifest.json ROOT",
                 "python3 install.py claude-code --root ROOT --check",
             ],
             spec["required_integrity_commands"],
@@ -274,12 +311,12 @@ class ManifestTests(unittest.TestCase):
         self.assertEqual(1, first["schema_version"])
         self.assertEqual(source_commit, first["source_commit"])
         self.assertFalse(first["dirty_source"])
-        self.assertEqual(60, len(first["entries"]))
+        self.assertEqual(67, len(first["entries"]))
         self.assertEqual(
             sorted(entry["destination"] for entry in first["entries"]),
             [entry["destination"] for entry in first["entries"]],
         )
-        self.assertEqual(12, len(first["source_only_links"]))
+        self.assertEqual(13, len(first["source_only_links"]))
         self.assertEqual(
             {"destination", "source", "size", "mode", "sha256"},
             set(first["entries"][0]),
@@ -331,16 +368,16 @@ class DeploymentManifestTests(unittest.TestCase):
         self.base = Path(self.temp.name)
         self.root = self.base / "claude-root"
         self.root.mkdir()
-        self.manifest_path = self.root / "delegation-triage-package-manifest.json"
+        self.manifest_path = self.root / "delegate-triage-package-manifest.json"
         self.stamp_path = self.base / "canonical-MANIFEST.md"
         self.entries = []
         self._add_file(
-            "skills/delegation-triage/WARRANTS.md",
+            "skills/delegate-triage/WARRANTS.md",
             "# Warrants\n\n### W-001 Fixture\n\nClaim.\n",
             "WARRANTS.md",
         )
         self._add_file(
-            "skills/delegation-triage/probes/record.md",
+            "skills/delegate-triage/probes/record.md",
             "# Record\n\nUses W-001.\n",
             "probes/record.md",
         )
@@ -408,7 +445,7 @@ class DeploymentManifestTests(unittest.TestCase):
             self.manifest["entries"].append(
                 {
                     "destination": destination,
-                    "source": destination.removeprefix("skills/delegation-triage/"),
+                    "source": destination.removeprefix("skills/delegate-triage/"),
                     "size": len(data),
                     "mode": "0644",
                     "sha256": __import__("hashlib").sha256(data).hexdigest(),
@@ -453,7 +490,7 @@ class DeploymentManifestTests(unittest.TestCase):
                 self.manifest = original
 
     def test_installed_file_mismatches_fail(self):
-        target = self.root / "skills/delegation-triage/probes/record.md"
+        target = self.root / "skills/delegate-triage/probes/record.md"
         cases = {
             "missing": lambda: target.unlink(),
             "digest and size": lambda: target.write_text("changed\n", encoding="utf-8"),
@@ -494,7 +531,7 @@ class DeploymentManifestTests(unittest.TestCase):
         self.assertFalse(self._validate().ok)
 
     def test_unlisted_skill_file_fails_but_extra_agent_is_reported(self):
-        extra_skill = self.root / "skills/delegation-triage/unlisted.md"
+        extra_skill = self.root / "skills/delegate-triage/unlisted.md"
         extra_skill.write_text("unlisted\n", encoding="utf-8")
 
         self.assertFalse(self._validate().ok)
@@ -518,7 +555,7 @@ class DeploymentManifestTests(unittest.TestCase):
         self.assertFalse(self._validate().ok)
 
     def test_exact_declared_missing_edge_is_reported_source_only(self):
-        source = "skills/delegation-triage/probes/record.md"
+        source = "skills/delegate-triage/probes/record.md"
         target = "../../docs/review.md"
         self._replace_file(source, f"# Record\n\nUses W-001 and [review]({target}).\n")
         self.manifest["source_only_links"] = [
@@ -532,7 +569,7 @@ class DeploymentManifestTests(unittest.TestCase):
         self.assertEqual([f"{source} -> {target}"], result.source_only)
 
     def test_undeclared_or_wrong_missing_edge_fails(self):
-        source = "skills/delegation-triage/probes/record.md"
+        source = "skills/delegate-triage/probes/record.md"
         target = "../../docs/review.md"
         self._replace_file(source, f"# Record\n\nUses W-001 and [review]({target}).\n")
 
@@ -545,10 +582,10 @@ class DeploymentManifestTests(unittest.TestCase):
         self.assertFalse(self._validate().ok)
 
     def test_declared_edge_fails_when_target_becomes_packaged(self):
-        source = "skills/delegation-triage/probes/record.md"
+        source = "skills/delegate-triage/probes/record.md"
         target = "../present.md"
         self._replace_file(source, f"# Record\n\nUses W-001 and [present]({target}).\n")
-        self._replace_file("skills/delegation-triage/present.md", "# Present\n")
+        self._replace_file("skills/delegate-triage/present.md", "# Present\n")
         self.manifest["source_only_links"] = [
             {"source": source, "target": target, "reason": "stale declaration"}
         ]
@@ -557,7 +594,7 @@ class DeploymentManifestTests(unittest.TestCase):
         self.assertFalse(self._validate().ok)
 
     def test_present_target_outside_root_or_absent_from_manifest_fails(self):
-        source = "skills/delegation-triage/probes/record.md"
+        source = "skills/delegate-triage/probes/record.md"
         outside_target = "../../../../outside.md"
         (self.base / "outside.md").write_text("outside\n", encoding="utf-8")
         self._replace_file(
@@ -666,7 +703,7 @@ class IsolatedInstallTests(unittest.TestCase):
     def _install_and_stamp(self):
         completed = self._run("install.py", "claude-code", "--root", self.root)
         self.assertEqual(0, completed.returncode, completed.stdout + completed.stderr)
-        manifest = self.root / "delegation-triage-package-manifest.json"
+        manifest = self.root / "delegate-triage-package-manifest.json"
         self.assertTrue(manifest.is_file(), "install must emit the package manifest")
         digest = __import__("hashlib").sha256(manifest.read_bytes()).hexdigest()
         source_commit = json.loads(manifest.read_text(encoding="utf-8"))["source_commit"]
@@ -682,7 +719,7 @@ class IsolatedInstallTests(unittest.TestCase):
 
         state = self._run(
             "check_state.py",
-            self.root / "skills/delegation-triage/STATE.md",
+            self.root / "skills/delegate-triage/STATE.md",
         )
         deployment = self._run(
             "check_wids.py",
@@ -702,7 +739,7 @@ class IsolatedInstallTests(unittest.TestCase):
 
         self.assertEqual(0, state.returncode, state.stdout + state.stderr)
         self.assertEqual(0, deployment.returncode, deployment.stdout + deployment.stderr)
-        self.assertIn("12 SOURCE_ONLY", deployment.stdout)
+        self.assertIn("13 SOURCE_ONLY", deployment.stdout)
         self.assertEqual(0, installer_check.returncode, installer_check.stdout + installer_check.stderr)
 
     def test_check_refuses_mutated_agent_delegation_skill_or_manifest(self):
@@ -710,7 +747,7 @@ class IsolatedInstallTests(unittest.TestCase):
         targets = [
             self.root / "agents/reviewer.md",
             self.root / "delegation.md",
-            self.root / "skills/delegation-triage/SKILL.md",
+            self.root / "skills/delegate-triage/SKILL.md",
             manifest,
         ]
         for target in targets:
