@@ -105,24 +105,36 @@ enum — normalization at projection, same treatment as model aliases.
 invocation returned a bare model-identity line: my flag error — `--print` and `--prompt` are
 aliases of the SAME flag in agy; passing both swallowed the prompt text. Surface lesson: use
 `agy -p "<prompt>"` with the prompt as the flag's argument, nothing else prompt-like on the
-line. Second invocation (correct form) delivered a 50,064-byte field inventory. **Adjudication (first
-graded instance of the STATE probationary regime):** every spot-checkable row matches my
-first-hand reads exactly — DecisionRecord field list and optionality (decision.ts:76–96),
-PolicyDecision's two branches with required propensity (decision.ts:104–124), recipe common
-fields (execution.ts:74–83) — and its CODE/CONTENT classifications are sound (locator, spec,
-rationale, question → CONTENT; hashes and enums → CODE). It also surfaced outcome-side
-vocabularies I had not read first-hand: Adjudication `verdict`
-VERIFIED/REJECTED/NEEDS_EVIDENCE/UNKNOWN with a `blind` flag (evidence.ts:72–82),
-VerificationPlan `independenceRequirement` none/independent_agent/human (evidence.ts:62–70),
-DeviationRecord categories including `worker_substitution` (plan.ts:60–78) — graded
-cited-unchecked (line-cited, not re-read by me; nothing in the Verdict rests on them alone).
-**Failure noted: the deliverable is truncated mid-table (ends inside ReplanRecord.triggers) and
-the requested sections 2–5 — enum vocabularies, single-decision-maker check, situation fields,
-declared blind spots — were never delivered, with no truncation notice.** Whether the cutoff is
-the CLI print-timeout or the model stopping is Unchecked. This is the omission-class weakness
-the roster already records for flash pins, now observed on the agy surface; it cost this probe
-nothing because F2/F3/F5 were established first-hand before the leg returned, and it is the
-concrete case for the probationary regime's completeness check.
+line. Second invocation (correct form) delivered a **complete 180,413-byte / 1,292-line inventory**
+(fixture: `../fixtures/P-20260814-s4-crosswalk-mapping/flash-s4-inventory.md`), all five
+requested sections including a full blind-spots declaration (all 16 workspace files read; four
+comment-cited documents correctly reported as absent from the export).
+
+**Correction, same session (supersedes an earlier adjudication that briefly stood in this file,
+INDEX, STATE, and ROUTE-HISTORY):** I first graded the leg "truncated mid-table, sections 2–5
+undelivered, no truncation notice." That was **my error, not flash's** — I read the output file
+at 50,064 bytes while the process was still writing, and named a completion failure without
+ruling out not-done-yet [per: claims-discipline#failure-claims]. The completion notice arrived
+after grading; re-checking the primary artifact flipped the finding. Regime consequence: the
+probationary completeness check gains a step 0 — **confirm the leg's process has exited before
+grading its output**.
+
+**Adjudication as corrected (first graded instance of the STATE probationary regime):** every
+spot-checked row matches first-hand reads exactly — DecisionRecord field list and optionality
+(decision.ts:76–96), PolicyDecision's two branches with required propensity
+(decision.ts:104–124), recipe common fields (execution.ts:74–83), plus two claims from the
+late-arriving sections re-verified after the correction: `ReplanRecord.authorizedBy:
+z.enum(["root_supervisor","human"])` (plan.ts:126) and the 9-member RESOURCE_DIMENSIONS list
+verbatim (resources.ts). CODE/CONTENT classifications are sound (locator, spec, rationale,
+question → CONTENT; hashes and enums → CODE). Its §3 singular-authority inventory is LONGER
+than my F5 (adds `authorizedBy`, `Objective.owner`, `OrchestratorRole`, the `escalation`
+enums, `madeBy`/`adjudicatedBy`) and its §4 details the situation axis beyond my read
+(9 resource dimensions incl. `provider_quota_estimate` and `human_review_minutes`; the
+hard/soft/reserve governance split; CapabilitySnapshot feature levels; `windowResetAt`) —
+these enrich F3/F5; conclusions unchanged (the singulars are per-decision or S4-internal; the
+spine stays clean). **Graded: high fidelity, complete, blind spots declared. Probation tally:
+exploration-class 1/3 concordant-positive.** The one true surface lesson stands from attempt 1:
+the flag alias trap.
 
 **F8 — surface vocabulary.** S4's 10-member dotted enum (claude.inline / subagent / workflow /
 agent_team / headless / headless_bare, antigravity.headless, codex.app_server, codex.cli,

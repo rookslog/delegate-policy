@@ -92,3 +92,11 @@ and aggregated metrics)." Encoded as the PROBATIONARY regime in STATE `explorati
 operator review to clear; 30-day review date). First graded instance: P-20260814-s4-crosswalk-mapping
 F7 — high fidelity on delivered content, truncated delivery with blind-spots section undelivered
 and undeclared.
+
+**Correction to the addendum, same session:** the "truncated delivery, blind spots undelivered"
+grading of P-20260814 F7 was the delegator's liveness error — the output file was read at 50KB
+while the leg was still writing; the finished artifact is a complete 180KB inventory with a full
+blind-spots declaration, two late-section claims re-verified against source. First-instance
+grade flips to concordant-positive (1/3). The regime keeps the lesson as its step 0: confirm
+process exit before grading. Flash's record on this leg is clean; the flag-alias invocation trap
+from attempt 1 stands as the only surface finding.
