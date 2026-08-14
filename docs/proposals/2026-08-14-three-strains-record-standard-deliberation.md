@@ -72,8 +72,9 @@ one decision-maker** (checked during the probe below; Unchecked today).
    projection of a content-rich S4 record loses the fields learning needs, the standard is
    premature and the looser adapter-per-pair coupling is correct. **EXECUTED same day:
    [P-20260814-s4-crosswalk-mapping](../../probes/records/P-20260814-s4-crosswalk-mapping.md) —
-   flip condition NOT met; the standard stands; [v0.2.4] reservations recommended (candidates[],
-   assignment{}, situation{}, surface members), disposition owed.**
+   flip condition NOT met; the standard stands. [v0.2.4] DISPOSED same day on operator
+   authorization: candidates[], assignment{}, situation{}, and execution_surface reserved;
+   §3a extended; projector rule added; peer/negotiated members reserved.**
 3. **At Task 15** (run export + policy-analysis seed): implement the export projection against
    the reconciled spine. The `PolicyDecision` namespace collision (DelegateOps: experiment
    assignment; S3: human-reviewed promotion) is resolved there, not papered over.

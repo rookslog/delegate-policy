@@ -150,11 +150,14 @@ follow.
 ## Dispositions
 
 1. **OI-2 (delegateops): closable** — resolution is this record; the standard stands.
-2. **Recommended amendments [v0.2.4], operator/panel disposition owed, NOT executed here:**
-   reserve `candidates[]` + `assignment{}` (F2), reserve `situation{}` (F3), register S4
-   surface members (F8), add §3a rows for the five new S3 dispositions (F1), projector rule for
-   S3 null `observed_model` (F1), `rework_actor`/`router_model` extension members named for the
-   day a paradigm needs them (F5).
+2. **Recommended amendments [v0.2.4] — DISPOSED AND EXECUTED same day (operator: "dispose the
+   v0.2.4 reservations"):** `candidates[]` + `assignment{}` reserved (F2), `situation{}`
+   reserved (F3), the five §3a rows added (F1), the null-`observed_model` projector rule added
+   (F1), `rework_actor: peer` / `router_model: negotiated` reserved (F5). One refinement at
+   disposition: F8's surface registration became a sibling **`execution_surface`** reserved
+   field instead of new `surface` members — the axes (delivery mechanism vs execution-surface
+   kind) do not project onto each other deterministically, which this record's own F8 measured;
+   registering into one field would have conflated them.
 3. **S3 vocabulary registration workload re-estimated:** 200 task_class values (was 58) — the
    §2a candidate assignment should be produced from the live store before it grows again.
 
