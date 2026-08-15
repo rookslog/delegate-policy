@@ -1,0 +1,4 @@
+interface:
+  display_name: "Delegation Triage"
+  short_description: "Choose and audit agent delegation routes"
+  default_prompt: "Use $delegate-triage to decide whether to delegate, explicitly select the appropriate model and role, produce bounded assignments, and record routing feedback."

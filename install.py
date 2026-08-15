@@ -10,6 +10,10 @@ Targets:
                 not dates in the artifact (operator direction 2026-07-10). Install via the
                 Cowork plugin UI, then stamp agents/MANIFEST.md.
   codex         emit the consumer guidance fragment (AGENTS.md-style), package path resolved.
+  codex-skills  deploy the operative skill core (SKILL/CONTRACT/ROUTES/ROUTE-HISTORY/STATE/
+                WARRANTS/EPISTEMICS/check_state.py + agents/openai.yaml) into
+                <root>/skills/delegate-triage with a sha256 manifest + ledger. Added
+                2026-08-15, replacing the hand-made same-name fork (July doctrine).
 
 Every deploy is a recorded deployment: this script prints the sha256 table to paste into
 agents/MANIFEST.md — it does not edit the manifest (curated by hand, by design).
@@ -18,6 +22,7 @@ Usage:
   python3 install.py claude-code [--root ~/.claude] [--check | --dry-run]
   python3 install.py cowork      [--version 0.3.0] [--check | --dry-run]
   python3 install.py codex       [--dest PATH]     (no --dest: prints to stdout)
+  python3 install.py codex-skills [--root ~/.codex] [--check]
 
 Plain stdlib. Zips are deterministic (fixed timestamps), so --check byte-compares honestly.
 """
@@ -462,6 +467,67 @@ def run_codex(args):
     return 0
 
 
+# The operative core the codex skill deployment carries. Probes stay canon-only (both
+# machines hold the repo; post-mortems edit canon + redeploy — deployed copies are read
+# surfaces). agents/openai.yaml is the codex harness wiring, canon-adopted 2026-08-15
+# from the fork it replaced.
+CODEX_SKILL_FILES = (
+    "SKILL.md", "CONTRACT.md", "ROUTES.md", "ROUTE-HISTORY.md", "STATE.md",
+    "WARRANTS.md", "EPISTEMICS.md", "check_state.py",
+)
+CODEX_MANIFEST_NAME = "delegate-triage-codex-manifest.json"
+CODEX_LEDGER_NAME = "delegate-triage-codex-maintenance.jsonl"
+
+
+def _codex_skill_pairs():
+    pairs = [(PKG / name, PurePosixPath(name)) for name in CODEX_SKILL_FILES]
+    pairs.append((PKG / "adapters/codex/openai.yaml", PurePosixPath("agents/openai.yaml")))
+    return pairs
+
+
+def run_codex_skills(args):
+    import datetime
+    dest_root = Path(args.root).expanduser() / "skills" / "delegate-triage"
+    canon = {str(rel): sha256(src.read_bytes()) for src, rel in _codex_skill_pairs()}
+    if args.check:
+        counts = {"OK": 0, "BEHIND": 0, "MISSING": 0}
+        for src, rel in _codex_skill_pairs():
+            deployed = dest_root / str(rel)
+            if not deployed.is_file():
+                counts["MISSING"] += 1
+                print(f"{'MISSING':8} {rel}")
+            elif sha256(deployed.read_bytes()) != canon[str(rel)]:
+                counts["BEHIND"] += 1
+                print(f"{'BEHIND':8} {rel}")
+            else:
+                counts["OK"] += 1
+        verdict = "OK" if not counts["BEHIND"] and not counts["MISSING"] else "FAIL"
+        print(f"codex skill deployment: ok {counts['OK']} · behind {counts['BEHIND']} · "
+              f"missing {counts['MISSING']} · {verdict}")
+        return 0 if verdict == "OK" else 1
+    for src, rel in _codex_skill_pairs():
+        dest = dest_root / str(rel)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(src.read_bytes())
+    stamp = {
+        "v": 1, "source_commit": head_commit(),
+        "generated": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "files": canon,
+        "note": "replaces the same-name GPT-repackaged fork (July doctrine, no "
+                "STATE/ROUTES) — cutover 2026-08-15, operator-authorized in-session",
+    }
+    (dest_root / CODEX_MANIFEST_NAME).write_text(
+        json.dumps(stamp, indent=1, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    with (dest_root / CODEX_LEDGER_NAME).open("a", encoding="utf-8") as ledger:
+        ledger.write(json.dumps({
+            "ts": stamp["generated"], "action": "install",
+            "source_commit": stamp["source_commit"], "files": len(canon),
+        }, sort_keys=True) + "\n")
+    print(f"deployed {len(canon)} files @ {stamp['source_commit']} -> {dest_root}")
+    return 0
+
+
 def main(argv):
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = ap.add_subparsers(dest="target", required=True)
@@ -471,11 +537,15 @@ def main(argv):
     cw.add_argument("--version", default=PLUGIN_VERSION_DEFAULT)
     cx = sub.add_parser("codex")
     cx.add_argument("--dest")
+    cs = sub.add_parser("codex-skills")
+    cs.add_argument("--root", default="~/.codex")
+    cs.add_argument("--check", action="store_true")
     for p in (cc, cw):
         p.add_argument("--check", action="store_true")
         p.add_argument("--dry-run", action="store_true")
     args = ap.parse_args(argv[1:])
-    return {"claude-code": run_claude_code, "cowork": run_cowork, "codex": run_codex}[args.target](args)
+    return {"claude-code": run_claude_code, "cowork": run_cowork, "codex": run_codex,
+            "codex-skills": run_codex_skills}[args.target](args)
 
 
 if __name__ == "__main__":
