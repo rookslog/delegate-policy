@@ -52,6 +52,24 @@ members `rework_actor: peer` / `router_model: negotiated` (F5). Reserved fields 
 no writer emits them yet; no field that existed in v0.2.3 changed meaning; consumers built on
 v0.2.3 remain correct.
 
+**Amended 2026-08-15 (v0.2.5), operator-authorized by delegation ("if you think I should
+ratify it… whatever you recommend", 2026-08-15 drop-in; DECISION_LOG delegate-ops), enacting
+BOTH filed 2026-08-14 proposals per their own ratification-scope sections.** Changes marked
+**[v0.2.5]** inline: (1) §2a's publication precondition is DISCHARGED — the candidate
+assignment is published in the ratified sibling
+[task-class enum](2026-08-14-task-class-enum.md) (13 members + reserved `other`; the
+`other`-member sub-decision adjudicated INCLUDED per the proposal's own recommendation);
+`class` remains null in native records and writers keep failing closed — REQ-enforcement is a
+separate later amendment, exactly as §2a and the sibling's §7 state. (2) The S3→v2 projector
+intent-side rules are ratified as specified in
+[the projector-rules proposal](2026-08-14-s3-projector-intent-rules.md): surface omission for
+projected intents (see §2 surface row), harness_contract's "✓ (v2-only)" native-only reading
+confirmed, loss-stated effort/model coercions confirmed, last-terminal-wins confirmed;
+companion seed-alias extension landed (delegate-runtime `f2b3e9a`). (3) `identity_source`
+gains **`human`** — a person typed the model id (weakest tier alongside ui-label; minted for
+`feedback close`). All changes additive; no field that existed in v0.2.4 changed meaning;
+consumers built on v0.2.4 remain correct.
+
 ## 0. What this is
 
 One **intent record** (written at the routing decision point) and one **outcome record**
@@ -131,7 +149,7 @@ Canonical fields → source mappings. `∅` = source cannot supply; nullable unl
 | `requested_effort` | ✓ | `low/medium/high/xhigh/max/session-inherited/unspecified/unknown`. `unknown`/`unspecified` are honest members — measured: S3 `requested_effort` includes `unspecified`(4)/`unknown`(1). `max` unobserved in either corpus but retained: legal API value, ROUTES R8 reserves it | `effort` — **intent-side ONLY if emitted pre-call; the probe shows one `effort` attribute, so S1 supplies intent-effort OR observed-effort, not both** (v0 double-mapped it — corrected: S1 intent `requested_effort` = ∅, see §3) | **∅** — `effort_spawner` is the PARENT's effort (measured: explorer-light's 50 spawn-reqs carry high/xhigh/medium while all 60 child stops say medium). Child intent-effort is not captured request-side | `requested_effort` |
 | `router_effort` | | NEW (from A1): the routing *driver's* own effort at decision time — the effort-inheritance detector's input | ∅ | `effort_spawner` ✓ (722/724) | ∅ |
 | `requested_role` | | agent-type / roster pin name | **∅** — probe finding 4: no `subagent_type` in the stream; `agent.name` redacted to `custom`; roster identity exists only on the OUTCOME event | `subagent_type` (706/724) | `requested_role` |
-| `surface` | ✓ | delivery surface (pin / per-call / generic / teams / cowork / **cli [v0.2.2]** — a native shell CLI invocation, e.g. `agy -p`, outside any Claude Code surface) — CONTRACT §3's control-surface question, made a field | ∅ | derivable (`tool_name`+`subagent_type`+`model_requested` nullity) | ∅ (new) |
+| `surface` | ✓ | delivery surface (pin / per-call / generic / teams / cowork / **cli [v0.2.2]** — a native shell CLI invocation, e.g. `agy -p`, outside any Claude Code surface) — CONTRACT §3's control-surface question, made a field. **[v0.2.5]** PROJECTED intents (S3→v2) may OMIT this field — S3 records no surface and a guessed member would be fabrication; rollup buckets omitted surfaces as `unrecorded` | ∅ | derivable (`tool_name`+`subagent_type`+`model_requested` nullity) | ∅ (new) |
 | `execution_surface` | | **RESERVED [v0.2.4]** (P-20260814 F8): the execution-surface KIND, a distinct axis from `surface`'s delivery mechanism — S4's 10-member vocabulary adopted verbatim: `claude.inline / claude.subagent / claude.workflow / claude.agent_team / claude.headless / claude.headless_bare / antigravity.headless / codex.app_server / codex.cli / api.deepseek` (execution.ts:110–121), extension by amendment here. Disposition note: the probe's registration recommendation was refined to a sibling field because the axes do not project onto each other deterministically (`claude.subagent` is pin OR per-call OR generic; both values of `claude.headless*` would have collapsed to `cli`) | ∅ | ∅ | ∅ (S4 supplies) |
 | `harness_contract` | ✓ (v2-only) | **content hash of the in-force contract** (prompt contract + skill + gate config) + a human label + **`harness_features` struct** — realized as `harness_contract.features` **[v0.2.1]** — (closed set, exactly: `review_gate: bool`, `claim_tagging: bool`, `tool_profile: ro/rw`; extension ONLY by amendment here — an open map would smuggle operator-chosen keys/values past a name-level export check, R1 F-6) so two disputants can see HOW contracts differ without fetching content (panel A12/W6) | ∅ | partial: `prompt_sha256` (prompt only) + `agent_def.{path,sha256}` (1,033 stops carry the executed definition hash — a strictly better partial the v0 missed; execution-side, joins per §1a) | ∅ (new) |
 | `router_model` | | who decided (self-route vs driver vs human): a normalized `vendor:model` binding, or the literal `human` **[v0.2.1]** (R1 F-12: the field's own semantics name a human router; forcing `other:human` was a workaround), or the literal `negotiated` **[v0.2.4, reserved]** (P-20260814 F5: a market/team-negotiated decision has no single router; member exists so a peer paradigm needs no schema break — no writer emits it yet) | ∅ | `parent_agent_id` ≈ | ∅ |
@@ -143,6 +161,13 @@ Canonical fields → source mappings. `∅` = source cannot supply; nullable unl
 | S3 riders | | `reversibility`, `consequence`, `ambiguity`, `validation_oracle`, `closure_target`, `write_scope_count` — optional canonical fields (they encode the CONTRACT §1 delegation test). Caveat (A4): `validation_oracle`/`closure_target` are free-code in practice (75 and 48 distinct values) — same `other`+free-slot rule as `reason_code`, and **[v0.2.1]** native v2 writers apply it at WRITE time (registered-member-or-`other` + `*_free` sibling gated on `other`), not only at export — R1 F-1 measured a repo-relative test path and a host:port passing straight into these fields under the plain-CODE_RE reading, instantiating the §8 consent-screen falsifier | ∅ | ∅ | ✓ native |
 
 ### 2a. The closed `class` enum — publication precondition
+
+**[v0.2.5] DISCHARGED: the candidate assignment is published and ratified in the sibling
+[task-class enum](2026-08-14-task-class-enum.md)** (grown census: 200 observed values → 13
+members + reserved `other`; both A12 axes preserved as first-class members;
+`check_task_class_enum.py` keeps the table honest against the live ledger). REQ-enforcement
+of `class` remains a separate, later amendment — until it lands, the fail-closed rule below
+stays in force unchanged.
 
 The candidate ~12-class assignment of all 58 observed S3 values MUST be published (as a table
 in this doc or a sibling) before `task_class.class` is enforced as REQ. **[v0.2.1]** Until
@@ -166,7 +191,7 @@ validate (R1 F-5: a silent collision fans out the §3 join).
 | field | REQ | semantics | S1 | S2 (execution-side) | S3 |
 |---|---|---|---|---|---|
 | ids + `v`,`ts`,`origin`,`outcome_ordinal`,`terminal` | ✓ | §1, §3 header | ✓ | ✓ (partition caveat §1a) | ✓ |
-| `observed_model` | ✓ | normalized binding + `identity_source` (transcript / API / UI-label — UI labels weakest, per package doctrine) + optional `raw` preserved spelling **[v0.2.1]**. Null value legal ONLY when `disposition ∈ {error, blocked, interrupted, abandoned}` (nothing answered, so nothing was observable); on every other disposition the key AND value are REQ — writers reject **[v0.2.1]** (R1 F-3: the default CLI path was silently producing terminal `accepted` outcomes with `observed_model: null`, the exact un-joinable record E-1 is blocked on) | `final_model`+`model_swapped` ✓, `identity_source: api` | `models_in_transcript` (1,872 non-empty) `identity_source: transcript`; request-side partition: `resolved_model` (650) `identity_source: api` — v0's ∅ was wrong both ways | `observed_model`+`observed_identity_source` ✓. **Projector rule [v0.2.4]** (P-20260814 F1): live S3 carries None in 126/338 and the literal `unknown` in 70/338 dispositions, mostly on `accept` — massively outside the F-3 null carve-out. F-3 binds NATIVE writers only; the S3→v2 projector maps None → the literal binding `unknown` with `identity_source` omitted, never a null value, so 58% of S3 outcomes stay joinable instead of validator-rejected |
+| `observed_model` | ✓ | normalized binding + `identity_source` (transcript / API / UI-label / **human [v0.2.5]** — a person typed the id, e.g. `feedback close`; human and UI-label are jointly the weakest tier, per package doctrine) + optional `raw` preserved spelling **[v0.2.1]**. Null value legal ONLY when `disposition ∈ {error, blocked, interrupted, abandoned}` (nothing answered, so nothing was observable); on every other disposition the key AND value are REQ — writers reject **[v0.2.1]** (R1 F-3: the default CLI path was silently producing terminal `accepted` outcomes with `observed_model: null`, the exact un-joinable record E-1 is blocked on) | `final_model`+`model_swapped` ✓, `identity_source: api` | `models_in_transcript` (1,872 non-empty) `identity_source: transcript`; request-side partition: `resolved_model` (650) `identity_source: api` — v0's ∅ was wrong both ways | `observed_model`+`observed_identity_source` ✓. **Projector rule [v0.2.4]** (P-20260814 F1): live S3 carries None in 126/338 and the literal `unknown` in 70/338 dispositions, mostly on `accept` — massively outside the F-3 null carve-out. F-3 binds NATIVE writers only; the S3→v2 projector maps None → the literal binding `unknown` with `identity_source` omitted, never a null value, so 58% of S3 outcomes stay joinable instead of validator-rejected |
 | `observed_effort` | | as delivered; enum incl. `unknown` (measured: S3 `observed_effort` = `unknown` in 21/58 events — the largest observed value) | `effort` ✓ (the ONE S1 effort attribute lands here, not on intent — A7) | `effort_child` ✓ (3,300 non-empty; incl. `low`(1) and nulls → `unknown`) | `observed_effort` |
 | `tokens{in,out,cache_r,cache_w}` | | **nullable, REQ-if-available** (v0's REQ was unsupplyable: S3 carries in/out in 4–5/96 and its allowlist has NO cache fields; S2 `usage_from_transcript` 428 non-empty) | ✓ (probe block) | `usage_from_transcript` when parsed | `input_tokens`/`output_tokens` when present |
 | `cost_usd` | | when the platform reports it; otherwise reconstructable later from `tokens` × intent `price_lineage` — state coverage honestly: measured absent from ~86% of S2 spawn-res and all S3 v1 core events | ✓ (when enabled) | ∅ mostly | ∅ / delegations `costUSD` (n=1) |

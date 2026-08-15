@@ -1,6 +1,11 @@
 # S3→v2 projector — intent-side rules (crosswalk amendment ask)
 
-**Status: FILED 2026-08-14, awaiting operator ratification (charter row 6).** Filed by the
+**Status: RATIFIED 2026-08-15 — operator-authorized by delegation (same drop-in as the
+task-class enum; recorded DECISION_LOG delegate-ops). Enacted same pass: crosswalk v0.2.5
+(§2 surface-row qualifier, readings 2–4 confirmed, `human` identity-source member) +
+seed-alias extension (delegate-runtime `f2b3e9a`; gemini spellings included, bare
+version-ambiguous names still unresolved by design).** *(Superseded status line follows for
+the record:)* FILED 2026-08-14, awaiting operator ratification (charter row 6). Filed by the
 same unattended run that filed the task-class enum; row 10 covers the filing. Implemented
 DARK in delegate-runtime `e5226ed` — safe pre-ratification because the rollup's attestation
 floor withholds ALL projected/self-reported evidence from decision grade, so no unratified

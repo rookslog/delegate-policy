@@ -1,6 +1,12 @@
 # Task-class enum — the §2a candidate assignment (crosswalk sibling)
 
-**Status: FILED 2026-08-14, awaiting operator ratification.** Filed under DECISION_CHARTER
+**Status: RATIFIED 2026-08-15 — operator-authorized by delegation ("I don't know what you
+want me to ratify, but if you think I should ratify it and ratify it, whatever you
+recommend", 2026-08-15 drop-in; recorded DECISION_LOG delegate-ops). The `other`-member
+sub-decision: INCLUDED, per §2's own recommendation. Enacted same pass: crosswalk v0.2.5
+§2a discharge + cross-reference; LANES P1 advance. REQ-enforcement of `task_class.class`
+remains a separate, later act (§7).** *(Superseded status line follows for the record:)*
+FILED 2026-08-14, awaiting operator ratification. Filed under DECISION_CHARTER
 row 10 (filing is agent-side); ratification is a record-standard amendment and is the
 operator's under charter row 6 — nothing in this document is live until ratified, and
 `task_class.class` stays null in native v2 records (writers fail closed on non-null) exactly
