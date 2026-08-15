@@ -1,7 +1,15 @@
 # Antigravity security posture — the two operator decisions, concretely
 
-**Status: FILED 2026-08-15, awaiting operator decision (both items are standing security
-configuration — never agent-side, whatever the charter delegates).** This document exists so
+**Status: BOTH DECIDED 2026-08-15 — operator granted in-session ("i give you permission to
+do it"), recommendations applied as written below: Decision 1 = leave the global
+Antigravity settings as-is (no change made; flip condition stands); Decision 2 = the
+adapter-scoped allow rule ADDED to `~/.claude/settings.json` (backup
+`settings-backup-20260815T*-permissions.json` beside the capture store). Registers at next
+session start. Operator's standing clarification recorded the same exchange: reserved
+items are ask-first, not operator-hands-only, and every ask must carry alternatives +
+load-bearing assumptions (memory `ratification-delegation-ruling`).** *(Superseded status
+line:)* FILED 2026-08-15, awaiting operator decision (both items are standing security
+configuration — never agent-side, whatever the charter delegates). This document exists so
 each queued item is one click away from the exact bytes it would change. Background evidence:
 STATE `agy-adapter-invocation`, the adapter
 (`~/Projects/delegate-runtime/delegate-to-antigravity/` — local hint), and the 2026-08-14 cross-harness
